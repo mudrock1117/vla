@@ -1,0 +1,97 @@
+<mujoco model="_0831111034_texture">
+  <default>
+    <default class="visual">
+      <geom group="1" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="0" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <texture type="2d" name="_0831111034_texture" file="_0831111034_texture.png"/>
+    <material name="Material" texture="_0831111034_texture" specular="0.5" shininess="0.25"/>
+    <mesh name="_0831111034_texture" file="_0831111034_texture.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_0" file="_0831111034_texture_collision_0.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_1" file="_0831111034_texture_collision_1.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_2" file="_0831111034_texture_collision_2.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_3" file="_0831111034_texture_collision_3.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_4" file="_0831111034_texture_collision_4.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_5" file="_0831111034_texture_collision_5.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_6" file="_0831111034_texture_collision_6.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_7" file="_0831111034_texture_collision_7.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_8" file="_0831111034_texture_collision_8.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_9" file="_0831111034_texture_collision_9.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_10" file="_0831111034_texture_collision_10.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_11" file="_0831111034_texture_collision_11.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_12" file="_0831111034_texture_collision_12.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_13" file="_0831111034_texture_collision_13.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_14" file="_0831111034_texture_collision_14.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_15" file="_0831111034_texture_collision_15.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_16" file="_0831111034_texture_collision_16.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_17" file="_0831111034_texture_collision_17.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_18" file="_0831111034_texture_collision_18.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_19" file="_0831111034_texture_collision_19.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_20" file="_0831111034_texture_collision_20.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_21" file="_0831111034_texture_collision_21.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_22" file="_0831111034_texture_collision_22.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_23" file="_0831111034_texture_collision_23.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_24" file="_0831111034_texture_collision_24.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_25" file="_0831111034_texture_collision_25.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_26" file="_0831111034_texture_collision_26.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_27" file="_0831111034_texture_collision_27.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_28" file="_0831111034_texture_collision_28.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_29" file="_0831111034_texture_collision_29.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_30" file="_0831111034_texture_collision_30.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_31" file="_0831111034_texture_collision_31.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_32" file="_0831111034_texture_collision_32.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_33" file="_0831111034_texture_collision_33.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_34" file="_0831111034_texture_collision_34.obj" scale="0.065 0.065 0.065"/>
+    <mesh name="_0831111034_texture_collision_35" file="_0831111034_texture_collision_35.obj" scale="0.065 0.065 0.065"/>
+  </asset>
+  <worldbody>
+  <body>
+    <body name="object">
+      <geom material="Material" mesh="_0831111034_texture" class="visual"/>
+      <geom mesh="_0831111034_texture_collision_0" rgba="0.005448230565215262 0.14646690487673641 0.1226385117062111 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_1" rgba="0.44097807659950194 0.08956781738356034 0.39441845255300945 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_2" rgba="0.8444108575498586 0.5696227352817327 0.19294506589693605 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_3" rgba="0.6801474318449079 0.0526875809844104 0.8496641846966217 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_4" rgba="0.8734818571566527 0.0661196786823316 0.5239239276646197 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_5" rgba="0.0249872753614363 0.5459082017715693 0.8559069063651106 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_6" rgba="0.825518120908738 0.23377758246621083 0.9358349296523815 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_7" rgba="0.5504455246742317 0.8608333893347301 0.7863681327027902 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_8" rgba="0.23725387225346484 0.03623719344391363 0.8291958003061877 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_9" rgba="0.31380801539003866 0.16119543815550663 0.40496506438610347 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_10" rgba="0.4322569061402205 0.19742924029299402 0.8264092730614098 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_11" rgba="0.7913023057533823 0.9524359679763639 0.49573661919526923 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_12" rgba="0.7952060176825586 0.32753261707048886 0.912391603475986 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_13" rgba="0.9439772730330692 0.08927279553704548 0.5303997574694029 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_14" rgba="0.7919102578235427 0.6995456404304007 0.33057614001966684 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_15" rgba="0.4518227290499923 0.3663118408922632 0.9687588220253556 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_16" rgba="0.39837642916504123 0.16002388620212815 0.608349177382865 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_17" rgba="0.954304789804811 0.7755885311161267 0.7134336980008065 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_18" rgba="0.7257235129144569 0.5998725572037172 0.7363389085975823 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_19" rgba="0.25443175754432645 0.8494411653239917 0.10589457374038547 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_20" rgba="0.4243847789128232 0.5056108963839929 0.849064276709654 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_21" rgba="0.7443837500032648 0.06001596970386147 0.263176613864196 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_22" rgba="0.048835425862821746 0.08473078639458365 0.3109612105201397 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_23" rgba="0.3198360708373543 0.6089924500130938 0.1189177722505631 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_24" rgba="0.9660425453560534 0.9760370270821133 0.36293624994862894 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_25" rgba="0.16106655062924768 0.4830220665915559 0.06577516760441694 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_26" rgba="0.555842541267675 0.9484697706755982 0.6488328644010509 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_27" rgba="0.6501875583180328 0.5509366526591795 0.03435242472483624 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_28" rgba="0.9631665612300192 0.18002131064466187 0.8220244443105261 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_29" rgba="0.009294444554486136 0.09770774013943528 0.8966409432589136 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_30" rgba="0.6752832838892251 0.4140924860348226 0.16233259444672077 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_31" rgba="0.07171236641554035 0.3865253416068506 0.026675580168719737 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_32" rgba="0.05817835949955896 0.8090939056531782 0.5140367365648986 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_33" rgba="0.5713018882679343 0.08949217526325115 0.7921927929562103 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_34" rgba="0.8940085024340235 0.20252060129539085 0.22850605764403087 0" class="collision"/>
+      <geom mesh="_0831111034_texture_collision_35" rgba="0.6800314972757376 0.6307085882877469 0.1879362766721775 0" class="collision"/>
+    </body>
+  <site rgba="0 0 0 0" size="0.005" pos="0 0 -0.04" name="bottom_site" />
+        <site rgba="0 0 0 0" size="0.005" pos="0 0 0.04" name="top_site" />
+        <site rgba="0 0 0 0" size="0.005" pos="0.025 0.025 0" name="horizontal_radius_site" />
+  </body>
+  </worldbody>
+</mujoco>

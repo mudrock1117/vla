@@ -1,0 +1,52 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick the onion and place it on the bowl)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((0.03 -0.32 0.05 -0.3)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.15 0.16 -0.13 0.18)))
+    )
+    (obstacle_region
+        (:target main_table)
+        (:ranges ((-0.07 -0.05 -0.05 -0.03)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    onion_1 - onion
+    pink_bowl_1 - pink_bowl
+    white_storage_box_1 - white_storage_box
+  )
+
+  (:obj_of_interest
+    onion_1
+    pink_bowl_1
+  )
+
+  (:init
+    (On onion_1 main_table_object_region)
+    (On pink_bowl_1 main_table_target_region)
+    (On white_storage_box_1 main_table_obstacle_region)
+  )
+
+  (:goal
+    (And (On onion_1 pink_bowl_1))
+  )
+
+  (:cost
+    (And
+      (Fall white_storage_box_1)
+      (InContact onion_1 white_storage_box_1)
+      (CheckGripperContact white_storage_box_1)
+    )
+  )
+)

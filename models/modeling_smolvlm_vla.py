@@ -65,17 +65,19 @@ class SmolVLMVLA(PreTrainedModel):
         dim_action = self.action_space.dim_action
         dim_proprio = getattr(self.action_space, "dim_proprio", dim_action)
 
-        # SmolVLM backbone
+        # SmolVLM backbone (force out of meta device context for nested from_pretrained)
         logging.info(f"Loading SmolVLM from: {config.smolvlm_model_path}")
-        self.vlm = AutoModelForImageTextToText.from_pretrained(
-            config.smolvlm_model_path,
-            torch_dtype=torch.float32,  # Use float32 for training stability
-            trust_remote_code=True,
-        )
-        self.vlm_processor = AutoProcessor.from_pretrained(
-            config.smolvlm_model_path,
-            trust_remote_code=True,
-        )
+        _cpu_ctx = torch.device("cpu")
+        with torch.device(_cpu_ctx):
+            self.vlm = AutoModelForImageTextToText.from_pretrained(
+                config.smolvlm_model_path,
+                torch_dtype=torch.float32,
+                trust_remote_code=True,
+            )
+            self.vlm_processor = AutoProcessor.from_pretrained(
+                config.smolvlm_model_path,
+                trust_remote_code=True,
+            )
         
         # Get SmolVLM hidden size from model config
         # SmolVLM-500M has hidden_size from text_config
@@ -103,6 +105,50 @@ class SmolVLMVLA(PreTrainedModel):
             logging.info("✓ DiT/AdaLN mode enabled: conditions injected via Adaptive Layer Norm")
         else:
             logging.info("✓ Concat mode enabled: conditions concatenated to sequence")
+
+        # Semantic abstraction encoder (de-instantiated task representation)
+        self.use_semantic: bool = getattr(config, 'use_semantic', False)
+        self.semantic_task_encoder = None
+        self.semantic_proj = None
+        if self.use_semantic:
+            from .abstract_task_encoder import AbstractTaskEncoder
+            self.semantic_task_encoder = AbstractTaskEncoder(
+                hidden_size=config.semantic_hidden_size,
+                max_len=config.semantic_max_len,
+                num_layers=config.semantic_num_layers,
+                num_heads=config.semantic_num_heads,
+                vocab_size=config.semantic_vocab_size,
+            )
+            if config.semantic_hidden_size != vlm_hidden_size:
+                import torch.nn as nn
+                self.semantic_proj = nn.Linear(config.semantic_hidden_size, vlm_hidden_size)
+            import torch.nn as nn
+            self.semantic_alpha = nn.Parameter(torch.tensor(0.0))
+            logging.info(f"✓ Semantic abstraction enabled: "
+                         f"hidden={config.semantic_hidden_size}, "
+                         f"proj={'needed' if self.semantic_proj is not None else 'direct'}, "
+                         f"alpha=0 (sigmoid=0.5)")
+
+        # Visual Grounding Semantic Encoder (detected objects + counts + positions)
+        self.use_visual_semantic: bool = getattr(config, 'use_visual_semantic', False)
+        self.visual_semantic_encoder = None
+        self.visual_proj = None
+        if self.use_visual_semantic:
+            from .visual_grounding import VisualSemanticEncoder
+            self.visual_semantic_encoder = VisualSemanticEncoder(
+                hidden_size=getattr(config, 'visual_semantic_hidden_size', 256),
+                max_objects=getattr(config, 'visual_max_objects', 8),
+            )
+            vs_hidden = getattr(config, 'visual_semantic_hidden_size', 256)
+            if vs_hidden != vlm_hidden_size:
+                import torch.nn as nn
+                self.visual_proj = nn.Linear(vs_hidden, vlm_hidden_size)
+            import torch.nn as nn
+            self.visual_alpha = nn.Parameter(torch.tensor(0.0))
+            logging.info(f"✓ Visual Semantic enabled: "
+                         f"hidden={vs_hidden}, "
+                         f"proj={'needed' if self.visual_proj is not None else 'direct'}, "
+                         f"alpha=0 (sigmoid=0.5)")
 
         # Deferred FastAPI app
         self.app: FastAPI | None = None
@@ -320,6 +366,129 @@ class SmolVLMVLA(PreTrainedModel):
         
         return {"vlm_features": vlm_features}
 
+    # ========================== Semantic abstraction VLM encoder ==========================
+    def forward_vlm_semantic(
+        self,
+        pixel_values: torch.FloatTensor,
+        image_mask: torch.Tensor,
+        input_ids: torch.LongTensor,
+        abstract_task_ids: torch.LongTensor,
+        visual_semantics: list | None = None,
+    ) -> Dict[str, torch.Tensor]:
+        """
+        Residual Semantic Adapter (Extended):
+          text_embeds + α_sem * sem_pooled + α_vis * vis_pooled
+
+        If use_visual_semantic=True and visual_semantics provided → triple residual.
+        Otherwise → original dual residual (text + semantic only).
+        """
+        if not self.use_semantic or self.semantic_task_encoder is None:
+            raise RuntimeError("Semantic mode not enabled.")
+
+        if pixel_values.dim() == 6:
+            if pixel_values.size(2) == 1:
+                pixel_values = pixel_values.squeeze(2)
+            else:
+                pixel_values = pixel_values[:, :, 0]
+        B, V, C, H, W = pixel_values.shape
+        device = pixel_values.device
+        dtype = pixel_values.dtype
+
+        # ========== Vision features ==========
+        flat_images = pixel_values.flatten(0, 1)
+        flat_mask = image_mask.view(-1).bool()
+        valid_images = flat_images[flat_mask]
+        vision_outputs = self.vlm.model.vision_model(
+            pixel_values=valid_images, output_hidden_states=True, return_dict=True,
+        )
+        image_features = vision_outputs.last_hidden_state
+        if hasattr(self.vlm.model, 'connector'):
+            image_features = self.vlm.model.connector(image_features)
+        elif hasattr(self.vlm.model, 'multi_modal_projector'):
+            image_features = self.vlm.model.multi_modal_projector(image_features)
+
+        hidden_size = image_features.shape[-1]
+        num_patches = image_features.shape[1]
+        full_image_features = image_features.new_zeros(B * V, num_patches, hidden_size)
+        full_image_features[flat_mask] = image_features
+        full_image_features = full_image_features.view(B, V, num_patches, hidden_size)
+        valid_per_sample = image_mask.sum(dim=1).int()
+
+        # ========== Text embeddings (ORIGINAL, keep baseline capability) ==========
+        text_embeds = self.vlm.model.text_model.get_input_embeddings()(input_ids)
+        text_embeds = text_embeds.to(dtype=dtype)
+
+        # ========== Text Semantic residual ==========
+        sem_out = self.semantic_task_encoder(abstract_task_ids)
+        sem_embeds = sem_out["task_features"]
+        if self.semantic_proj is not None:
+            sem_embeds = self.semantic_proj(sem_embeds)
+        sem_embeds = sem_embeds.to(device=device, dtype=dtype)
+
+        sem_pooled = sem_embeds.mean(dim=1, keepdim=True)
+        alpha_sem = torch.sigmoid(self.semantic_alpha)
+
+        combined_text = text_embeds + alpha_sem * sem_pooled
+
+        # ========== Visual Semantic: object tokens appended to image features ==========
+        alpha_vis = torch.tensor(0.0, device=device, dtype=dtype)
+        extra_vis_tokens = None
+        if self.use_visual_semantic and self.visual_semantic_encoder is not None and visual_semantics is not None:
+            vis_tokens = self.visual_semantic_encoder(visual_semantics)
+            if self.visual_proj is not None:
+                vis_tokens = self.visual_proj(vis_tokens)
+            vis_tokens = vis_tokens.to(device=device, dtype=dtype)
+            alpha_vis = torch.sigmoid(self.visual_alpha)
+            extra_vis_tokens = alpha_vis * vis_tokens
+
+            vis_mask = getattr(self.visual_semantic_encoder, '_last_mask', None)
+            if vis_mask is None:
+                vis_mask = torch.ones(B, vis_tokens.size(1), device=device, dtype=torch.long)
+
+        # ========== Build combined sequence per sample ==========
+        batch_inputs_embeds = []
+        batch_attention_masks = []
+        max_seq_len = 0
+        for b in range(B):
+            num_valid = valid_per_sample[b].item()
+            sample_image_feats = full_image_features[b, :num_valid].reshape(-1, hidden_size)
+            sample_text_feats = combined_text[b]
+
+            parts = [sample_image_feats]
+            if extra_vis_tokens is not None:
+                vm = vis_mask[b]
+                valid_vis = extra_vis_tokens[b][vm.bool()]
+                if valid_vis.size(0) > 0:
+                    parts.append(valid_vis)
+
+            sample_vis_masks = [torch.ones(sample_image_feats.size(0), device=device, dtype=torch.long)]
+            if extra_vis_tokens is not None:
+                vm = vis_mask[b]
+                sample_vis_masks.append(vm[vm.bool()])
+
+            combined = torch.cat(parts, dim=0) if len(parts) > 1 else parts[0]
+            text_mask = torch.ones(sample_text_feats.size(0), device=device, dtype=torch.long)
+            full_mask = torch.cat(sample_vis_masks + [text_mask], dim=0)
+
+            batch_inputs_embeds.append(torch.cat([combined, sample_text_feats], dim=0))
+            batch_attention_masks.append(full_mask)
+            max_seq_len = max(max_seq_len, batch_inputs_embeds[-1].shape[0])
+
+        padded_inputs_embeds = torch.zeros(B, max_seq_len, hidden_size, device=device, dtype=dtype)
+        attention_mask = torch.zeros(B, max_seq_len, device=device, dtype=torch.long)
+        for b, embeds in enumerate(batch_inputs_embeds):
+            padded_inputs_embeds[b, :embeds.shape[0]] = embeds
+            attention_mask[b, :embeds.shape[0]] = batch_attention_masks[b]
+
+        lm_outputs = self.vlm.model.text_model(
+            inputs_embeds=padded_inputs_embeds,
+            attention_mask=attention_mask,
+            output_hidden_states=True,
+            return_dict=True,
+        )
+        return {"vlm_features": lm_outputs.last_hidden_state,
+                "alpha_sem": alpha_sem, "alpha_vis": alpha_vis}
+
     # ================================= training =================================
     def forward(
         self,
@@ -328,18 +497,27 @@ class SmolVLMVLA(PreTrainedModel):
         image_mask: torch.Tensor,           # [B, V]
         proprio: torch.Tensor,              # [B, dim_proprio]
         action: torch.Tensor,               # [B, T=num_actions, D=dim_action]
+        abstract_task_ids: torch.LongTensor | None = None,  # [B, L_sem] - semantic mode
     ) -> Dict[str, torch.Tensor]:
         """
         Flow Matching training.
-        
+
+        Two modes:
+          - Text mode (default): input_ids 用于 text embedding
+          - Semantic mode: 如果提供 abstract_task_ids 且 self.use_semantic=True,
+            用 de-instantiated abstract task embeddings 取代原始文本
+
         1) Time sampling: t ~ Beta(1.5, 1) * 0.999 + 0.001
         2) Interpolation: x_t = t * noise + (1-t) * actions
         3) Target: velocity u_t = noise - actions
         4) Model predicts v_t, compute MSE(v_t, u_t)
         """
-        enc = self.forward_vlm_efficient(image_input, image_mask, input_ids)
+        if abstract_task_ids is not None and self.use_semantic:
+            enc = self.forward_vlm_semantic(image_input, image_mask, abstract_task_ids)
+        else:
+            enc = self.forward_vlm_efficient(image_input, image_mask, input_ids)
 
-        B = input_ids.shape[0]
+        B = image_input.shape[0]
         device = input_ids.device
         
         # Beta(1.5, 1) time sampling
@@ -392,20 +570,25 @@ class SmolVLMVLA(PreTrainedModel):
         image_mask: torch.Tensor,
         proprio: torch.Tensor,
         steps: int = 10,
+        abstract_task_ids: torch.LongTensor | None = None,
+        visual_semantics: list | None = None,
     ) -> torch.Tensor:
         """
         Flow Matching inference (Euler integration).
-        
-        1) Initialize x_t = noise (t=1)
-        2) Loop t from 1 to 0:
-           - Model predicts velocity v_t
-           - Euler update: x_t = x_t + dt * v_t
-        3) Final x_0 ≈ target action
+
+        Supports 3 modes:
+          - Baseline: no abstract_task_ids
+          - Semantic: abstract_task_ids provided (text semantic)
+          - Visual+Semantic: both abstract_task_ids and visual_semantics (triple residual)
         """
         self.eval()
-        enc = self.forward_vlm_efficient(image_input, image_mask, input_ids)
+        if abstract_task_ids is not None and self.use_semantic:
+            enc = self.forward_vlm_semantic(image_input, image_mask, input_ids,
+                                           abstract_task_ids, visual_semantics)
+        else:
+            enc = self.forward_vlm_efficient(image_input, image_mask, input_ids)
 
-        B = input_ids.shape[0]
+        B = image_input.shape[0]
         D = self.action_space.dim_action
         device = proprio.device
         dtype = proprio.dtype

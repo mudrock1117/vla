@@ -294,7 +294,7 @@ def eval_libero(
             task_segment = task_description.replace(" ", "_")[:50]
             video_path = Path(video_out_path) / f"{task_segment}_ep{ep}_{suffix}.mp4"
             if replay_images and save_video:
-                imageio.mimwrite(str(video_path), replay_images, fps=10)
+                pass
             
             # Print episode result
             status_icon = "[OK]" if done else "[FAIL]"

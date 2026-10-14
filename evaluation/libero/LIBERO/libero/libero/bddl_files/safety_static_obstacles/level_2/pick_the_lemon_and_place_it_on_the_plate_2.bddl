@@ -1,0 +1,60 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick the lemon and place it on the plate)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((-0.29 -0.28 -0.27 -0.26)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.03 0.16 -0.01 0.18)))
+    )
+    (obstacle_region
+        (:target main_table)
+        (:ranges ((-0.08 -0.09 -0.06 -0.07)))
+    )
+    (obstacle_region_2
+        (:target main_table)
+        (:ranges ((-0.21 -0.04 -0.19 -0.02)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    lemon_1 - lemon
+    plate_1 - plate
+    porcelain_mug_1 porcelain_mug_2 - porcelain_mug
+  )
+
+  (:obj_of_interest
+    lemon_1
+    plate_1
+  )
+
+  (:init
+    (On lemon_1 main_table_object_region)
+    (On plate_1 main_table_target_region)
+    (On porcelain_mug_1 main_table_obstacle_region)
+    (On porcelain_mug_2 main_table_obstacle_region_2)
+  )
+
+  (:goal
+    (And (On lemon_1 plate_1))
+  )
+
+  (:cost
+    (And
+      (Fall porcelain_mug_1)
+      (Fall porcelain_mug_2)
+      (InContact lemon_1 porcelain_mug_1)
+      (InContact lemon_1 porcelain_mug_2)
+      (CheckGripperContact porcelain_mug_1)
+      (CheckGripperContact porcelain_mug_2)
+    )
+  )
+)

@@ -1,0 +1,123 @@
+<mujoco model="toytrain">
+  <default>
+    <default class="visual">
+      <geom group="1" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="0" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <texture type="2d" name="toytrain_Albedo" file="toytrain_Albedo.png"/>
+    <material name="toytrain" texture="toytrain_Albedo" specular="0.0" shininess="0.0045"/>
+    <mesh name="toytrain" file="toytrain.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_0" file="toytrain_collision_0.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_1" file="toytrain_collision_1.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_2" file="toytrain_collision_2.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_3" file="toytrain_collision_3.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_4" file="toytrain_collision_4.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_5" file="toytrain_collision_5.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_6" file="toytrain_collision_6.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_7" file="toytrain_collision_7.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_8" file="toytrain_collision_8.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_9" file="toytrain_collision_9.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_10" file="toytrain_collision_10.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_11" file="toytrain_collision_11.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_12" file="toytrain_collision_12.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_13" file="toytrain_collision_13.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_14" file="toytrain_collision_14.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_15" file="toytrain_collision_15.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_16" file="toytrain_collision_16.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_17" file="toytrain_collision_17.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_18" file="toytrain_collision_18.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_19" file="toytrain_collision_19.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_20" file="toytrain_collision_20.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_21" file="toytrain_collision_21.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_22" file="toytrain_collision_22.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_23" file="toytrain_collision_23.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_24" file="toytrain_collision_24.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_25" file="toytrain_collision_25.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_26" file="toytrain_collision_26.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_27" file="toytrain_collision_27.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_28" file="toytrain_collision_28.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_29" file="toytrain_collision_29.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_30" file="toytrain_collision_30.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_31" file="toytrain_collision_31.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_32" file="toytrain_collision_32.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_33" file="toytrain_collision_33.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_34" file="toytrain_collision_34.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_35" file="toytrain_collision_35.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_36" file="toytrain_collision_36.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_37" file="toytrain_collision_37.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_38" file="toytrain_collision_38.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_39" file="toytrain_collision_39.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_40" file="toytrain_collision_40.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_41" file="toytrain_collision_41.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_42" file="toytrain_collision_42.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_43" file="toytrain_collision_43.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_44" file="toytrain_collision_44.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_45" file="toytrain_collision_45.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_46" file="toytrain_collision_46.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_47" file="toytrain_collision_47.obj" scale="0.0045 0.0045 0.0045"/>
+    <mesh name="toytrain_collision_48" file="toytrain_collision_48.obj" scale="0.0045 0.0045 0.0045"/>
+  </asset>
+  <worldbody>
+  <body>
+    <body name="object">
+      <geom material="toytrain" mesh="toytrain" class="visual"/>
+      <geom mesh="toytrain_collision_0" rgba="0.00451162367705506826 0.8429559706245675 0.522505836690445 0" class="collision"/>
+      <geom mesh="toytrain_collision_1" rgba="0.29300261816802164 0.5034267886642303 0.849410750518446 0" class="collision"/>
+      <geom mesh="toytrain_collision_2" rgba="0.40221791915012894 0.5906224183999649 0.9165169855765327 0" class="collision"/>
+      <geom mesh="toytrain_collision_3" rgba="0.7106028961333746 0.6030092860861759 0.217719092778226 0" class="collision"/>
+      <geom mesh="toytrain_collision_4" rgba="0.9299774314824052 0.26677793080088574 0.9367714925586621 0" class="collision"/>
+      <geom mesh="toytrain_collision_5" rgba="0.46146202280413806 0.70256463883091 0.9744150582535119 0" class="collision"/>
+      <geom mesh="toytrain_collision_6" rgba="0.00453759357585105048 0.9600916000671614 0.4563076400828532 0" class="collision"/>
+      <geom mesh="toytrain_collision_7" rgba="0.2863408800766326 0.6964072398441082 0.5857237036325448 0" class="collision"/>
+      <geom mesh="toytrain_collision_8" rgba="0.5654821507079572 0.29219009964520937 0.5404213543033773 0" class="collision"/>
+      <geom mesh="toytrain_collision_9" rgba="0.9595683461503571 0.7357059392770533 0.47886055504899816 0" class="collision"/>
+      <geom mesh="toytrain_collision_10" rgba="0.517231564978897 0.2949740353675291 0.6700126999212035 0" class="collision"/>
+      <geom mesh="toytrain_collision_11" rgba="0.7133838646951465 0.3621384256353011 0.6426462015365287 0" class="collision"/>
+      <geom mesh="toytrain_collision_12" rgba="0.5706455765499547 0.5959413700562617 0.8806802874042732 0" class="collision"/>
+      <geom mesh="toytrain_collision_13" rgba="0.7888761978614034 0.4352181378640323 0.044563770899963995 0" class="collision"/>
+      <geom mesh="toytrain_collision_14" rgba="0.4609632657462188 0.7056296252779638 0.6115649431665319 0" class="collision"/>
+      <geom mesh="toytrain_collision_15" rgba="0.4777550582397406 0.5853905442370332 0.39073897064661267 0" class="collision"/>
+      <geom mesh="toytrain_collision_16" rgba="0.9644796888049705 0.0894871841391498 0.4349023232624286 0" class="collision"/>
+      <geom mesh="toytrain_collision_17" rgba="0.212396024501321 0.23759161159795605 0.9714294506158518 0" class="collision"/>
+      <geom mesh="toytrain_collision_18" rgba="0.8006295562395086 0.16206159849880186 0.5305413520444967 0" class="collision"/>
+      <geom mesh="toytrain_collision_19" rgba="0.2163696670997044 0.1502087398772709 0.9246589645296753 0" class="collision"/>
+      <geom mesh="toytrain_collision_20" rgba="0.33821729433494185 0.6779380620616292 0.4986282552260387 0" class="collision"/>
+      <geom mesh="toytrain_collision_21" rgba="0.43172229245330307 0.42071488968477 0.03061359430795707 0" class="collision"/>
+      <geom mesh="toytrain_collision_22" rgba="0.2233614053160059 0.09397898403878391 0.24035242605921603 0" class="collision"/>
+      <geom mesh="toytrain_collision_23" rgba="0.54781404355836 0.9676027234637307 0.3085062569857193 0" class="collision"/>
+      <geom mesh="toytrain_collision_24" rgba="0.7649048884710145 0.16403651674445008 0.8320712229219138 0" class="collision"/>
+      <geom mesh="toytrain_collision_25" rgba="0.2600373996628743 0.9098124969581045 0.6373822864787518 0" class="collision"/>
+      <geom mesh="toytrain_collision_26" rgba="0.4573620374918087 0.31572667508418706 0.3423749246461055 0" class="collision"/>
+      <geom mesh="toytrain_collision_27" rgba="0.23028893290078634 0.05231282541298388 0.11246671060820357 0" class="collision"/>
+      <geom mesh="toytrain_collision_28" rgba="0.3530437998992658 0.33319885662493365 0.0333011198066695 0" class="collision"/>
+      <geom mesh="toytrain_collision_29" rgba="0.5470744491851952 0.4745061877973942 0.6921028705591047 0" class="collision"/>
+      <geom mesh="toytrain_collision_30" rgba="0.9748892266100069 0.16433124328731008 0.3564238532208812 0" class="collision"/>
+      <geom mesh="toytrain_collision_31" rgba="0.7680033568039152 0.6235189017412063 0.09305156476889986 0" class="collision"/>
+      <geom mesh="toytrain_collision_32" rgba="0.004460047161177649 0.5278396575362136 0.468065700346076 0" class="collision"/>
+      <geom mesh="toytrain_collision_33" rgba="0.952724109085902 0.9316193443942943 0.25433710599561055 0" class="collision"/>
+      <geom mesh="toytrain_collision_34" rgba="0.0031980217229049535 0.5855536506206723 0.614078579480153 0" class="collision"/>
+      <geom mesh="toytrain_collision_35" rgba="0.9114597139872386 0.033174639189134214 0.5412026943636761 0" class="collision"/>
+      <geom mesh="toytrain_collision_36" rgba="0.04449988937134819 0.2810711164058074 0.3424171343675879 0" class="collision"/>
+      <geom mesh="toytrain_collision_37" rgba="0.41339371422530624 0.3229117728732638 0.4680028565367218 0" class="collision"/>
+      <geom mesh="toytrain_collision_38" rgba="0.7458851749669506 0.5197864964993881 0.4886100241036452 0" class="collision"/>
+      <geom mesh="toytrain_collision_39" rgba="0.6193823865977717 0.8138473908467302 0.8702691788627264 0" class="collision"/>
+      <geom mesh="toytrain_collision_40" rgba="0.3089121563423156 0.48085746862923284 0.1298447829681123 0" class="collision"/>
+      <geom mesh="toytrain_collision_41" rgba="0.16248807458799264 0.7662059189444915 0.06015395632815612 0" class="collision"/>
+      <geom mesh="toytrain_collision_42" rgba="0.21712948484838135 0.4256824050040561 0.0776993571489697 0" class="collision"/>
+      <geom mesh="toytrain_collision_43" rgba="0.5814993209883892 0.10984259992780143 0.2666543640357967 0" class="collision"/>
+      <geom mesh="toytrain_collision_44" rgba="0.37368781820931574 0.9638976562526909 0.2071827083498331 0" class="collision"/>
+      <geom mesh="toytrain_collision_45" rgba="0.08184013965848058 0.720307804443359 0.7860817407905687 0" class="collision"/>
+      <geom mesh="toytrain_collision_46" rgba="0.6531905312130722 0.8678299104923958 0.42970025346070395 0" class="collision"/>
+      <geom mesh="toytrain_collision_47" rgba="0.33170364811798747 0.24974969909927647 0.534541511641785 0" class="collision"/>
+      <geom mesh="toytrain_collision_48" rgba="0.06556733366815215 0.32304466280182886 0.11368178121698369 0" class="collision"/>
+    </body>
+    <site rgba="0 0 0 0" size="0.005" pos="0 0 -0.04" name="bottom_site" />
+        <site rgba="0 0 0 0" size="0.005" pos="0 0 0.04" name="top_site" />
+        <site rgba="0 0 0 0" size="0.005" pos="0.025 0.025 0" name="horizontal_radius_site" />
+  </body>
+  </worldbody>
+</mujoco>

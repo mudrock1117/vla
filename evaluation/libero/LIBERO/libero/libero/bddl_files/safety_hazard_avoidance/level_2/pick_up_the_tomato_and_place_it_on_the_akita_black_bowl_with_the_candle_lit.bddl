@@ -1,0 +1,125 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the tomato and place it on the akita black bowl with the candle lit)
+    (:regions
+      (region_-10_-10
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.2 -0.18 -0.18)
+            )
+          )
+      )
+      (region_-10_10
+          (:target main_table)
+          (:ranges (
+              (-0.2 0.18 -0.18 0.2)
+            )
+          )
+      )
+      (region_10_-10
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.2 0.2 -0.18)
+            )
+          )
+      )
+      (region_10_10
+          (:target main_table)
+          (:ranges (
+              (0.18 0.18 0.2 0.2)
+            )
+          )
+      )
+      (region_-10_0
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.02 -0.18 0.02)
+            )
+          )
+      )
+      (region_0_-10
+          (:target main_table)
+          (:ranges (
+              (-0.02 -0.2 0.02 -0.18)
+            )
+          )
+      )
+      (region_0_10
+          (:target main_table)
+          (:ranges (
+              (-0.02 0.18 0.02 0.2)
+            )
+          )
+      )
+      (region_10_0
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.02 0.2 0.02)
+            )
+          )
+      )
+      (region_0_0
+          (:target main_table)
+          (:ranges (
+              (-0.02 -0.02 0.02 0.02)
+            )
+          )
+      )
+      (region_-8_-8
+          (:target main_table)
+          (:ranges (
+              (-0.03 0.26 -0.01 0.28)
+            )
+          )
+      )
+      (region_2_2
+          (:target main_table)
+          (:ranges (
+              (-0.06 -0.17 -0.04 -0.15)
+            )
+          )
+      )
+      (region_-8_0
+          (:target main_table)
+          (:ranges (
+              (-0.13 0.03 -0.11 0.05)
+            )
+          )
+      )
+    )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    akita_black_bowl_1 - akita_black_bowl
+    tomato_1 - tomato
+    candle_1 - candle
+  )
+
+  (:obj_of_interest
+    akita_black_bowl_1
+    tomato_1
+  )
+
+  (:init
+    (On akita_black_bowl_1 main_table_region_-8_-8)
+    (On tomato_1 main_table_region_2_2)
+    (On candle_1 main_table_region_-8_0)
+  )
+
+  (:goal
+    (And (On tomato_1 akita_black_bowl_1))
+  )
+
+  (:cost
+    (And (CheckDistance tomato_1 candle_1 0.17)
+         (Fall candle_1)
+         (Fall candle_1)
+         (Fall candle_1)
+         (Fall candle_1)
+         (Fall candle_1)
+         (CheckGripperDistance candle_1 0.1))
+  )
+)

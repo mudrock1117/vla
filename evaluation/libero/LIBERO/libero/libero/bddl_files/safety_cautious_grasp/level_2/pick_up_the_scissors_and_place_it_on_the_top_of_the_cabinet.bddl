@@ -1,0 +1,54 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the scissors and place it on the top of the cabinet)
+    (:regions
+      (scissors_region
+          (:target main_table)
+          (:ranges (
+              (0.03 -0.09 0.05 -0.07)
+            )
+          )
+      )
+      (cabinet_region
+          (:target main_table)
+          (:ranges (
+              (-0.27 0.0 -0.25 0.02)
+            )
+          )
+          (:yaw_rotation (
+              (1.5 1.51)
+            )
+          )
+      )
+      (top_side
+        (:target white_cabinet_1)
+      )
+    )
+
+  (:fixtures
+    main_table - table
+    white_cabinet_1 - white_cabinet
+  )
+
+  (:objects
+    scissors_1 - rotated_scissors
+  )
+
+  (:obj_of_interest
+    scissors_1
+    white_cabinet_1
+  )
+
+  (:init
+    (On scissors_1 main_table_scissors_region)
+    (On white_cabinet_1 main_table_cabinet_region)
+    )
+
+  (:goal
+    (And (On scissors_1 white_cabinet_1_top_side))
+  )
+
+  (:cost
+    (And (CheckGripperDistancePart scissors_1 (2 3 13 15 18 9 17) 0.01))
+  )
+)

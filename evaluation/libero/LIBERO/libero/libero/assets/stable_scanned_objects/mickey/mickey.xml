@@ -1,0 +1,130 @@
+<mujoco model="mickey">
+  <default>
+    <default class="visual">
+      <geom group="1" type="mesh" contype="0" conaffinity="0" mass="0.5"/>
+    </default>
+    <default class="collision">
+      <geom group="0" type="mesh" mass="0.5" solref="0.001 2" solimp="0.998 0.998 0.001"/>
+    </default>
+     <default class="grasppoint">
+      <site type="sphere" size="0.01" group="4" rgba="0 0 1 1"/>
+    </default>
+  </default>
+  <asset>
+    <texture name="mickey" file="./mickey.png" type="2d"/>
+    <material name="mickey" texture="mickey"/>
+    <mesh name="mickey" file="./mickey.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_0" file="mickey_collision_0.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_1" file="mickey_collision_1.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_2" file="mickey_collision_2.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_3" file="mickey_collision_3.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_4" file="mickey_collision_4.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_5" file="mickey_collision_5.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_6" file="mickey_collision_6.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_7" file="mickey_collision_7.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_8" file="mickey_collision_8.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_9" file="mickey_collision_9.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_10" file="mickey_collision_10.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_11" file="mickey_collision_11.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_12" file="mickey_collision_12.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_13" file="mickey_collision_13.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_14" file="mickey_collision_14.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_15" file="mickey_collision_15.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_16" file="mickey_collision_16.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_17" file="mickey_collision_17.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_18" file="mickey_collision_18.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_19" file="mickey_collision_19.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_20" file="mickey_collision_20.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_21" file="mickey_collision_21.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_22" file="mickey_collision_22.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_23" file="mickey_collision_23.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_24" file="mickey_collision_24.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_25" file="mickey_collision_25.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_26" file="mickey_collision_26.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_27" file="mickey_collision_27.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_28" file="mickey_collision_28.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_29" file="mickey_collision_29.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_30" file="mickey_collision_30.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_31" file="mickey_collision_31.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_32" file="mickey_collision_32.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_33" file="mickey_collision_33.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_34" file="mickey_collision_34.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_35" file="mickey_collision_35.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_36" file="mickey_collision_36.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_37" file="mickey_collision_37.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_38" file="mickey_collision_38.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_39" file="mickey_collision_39.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_40" file="mickey_collision_40.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_41" file="mickey_collision_41.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_42" file="mickey_collision_42.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_43" file="mickey_collision_43.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_44" file="mickey_collision_44.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_45" file="mickey_collision_45.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_46" file="mickey_collision_46.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_47" file="mickey_collision_47.obj" scale="0.5 0.5 0.5"/>
+<mesh name="mickey_collision_48" file="mickey_collision_48.obj" scale="0.5 0.5 0.5"/>
+
+  </asset>
+  <worldbody>
+  <body>
+    <body name="object">
+      <geom mesh="mickey" class="visual" material="mickey"/>
+      <geom mesh="mickey_collision_0" rgba="0.38902748818992516 0.8209919069610097 0.4672937166612269 0" class="collision"/>
+      <geom mesh="mickey_collision_1" rgba="0.9147313591985093 0.8077680030412155 0.008322226870032923 0" class="collision"/>
+      <geom mesh="mickey_collision_2" rgba="0.4490819705685022 0.980652009226113 0.4226167908825119 0" class="collision"/>
+      <geom mesh="mickey_collision_3" rgba="0.5473874857121727 0.2502377631465651 0.04571335436062185 0" class="collision"/>
+      <geom mesh="mickey_collision_4" rgba="0.9729340777756366 0.4227218630600016 0.6188504905622593 0" class="collision"/>
+      <geom mesh="mickey_collision_5" rgba="0.22815942955279267 0.6987234926307057 0.8000603117680011 0" class="collision"/>
+      <geom mesh="mickey_collision_6" rgba="0.07430941580813433 0.5165103082872388 0.20857808627004726 0" class="collision"/>
+      <geom mesh="mickey_collision_7" rgba="0.40628097054949397 0.9435162688193843 0.38915173016533233 0" class="collision"/>
+      <geom mesh="mickey_collision_8" rgba="0.488893791967445 0.11589205186556595 0.5563349691276287 0" class="collision"/>
+      <geom mesh="mickey_collision_9" rgba="0.6625258780882509 0.9125831394061953 0.5583917680446751 0" class="collision"/>
+      <geom mesh="mickey_collision_10" rgba="0.3247948488288358 0.851097753054689 0.0696523124762215 0" class="collision"/>
+      <geom mesh="mickey_collision_11" rgba="0.5637631997630988 0.6504428942500152 0.3328000137648287 0" class="collision"/>
+      <geom mesh="mickey_collision_12" rgba="0.13883234708808423 0.38231924779243 0.14643814464168625 0" class="collision"/>
+      <geom mesh="mickey_collision_13" rgba="0.08905862122412067 0.6988501742555904 0.542879930616753 0" class="collision"/>
+      <geom mesh="mickey_collision_14" rgba="0.5130471874652161 0.34997612133155376 0.03855307160670507 0" class="collision"/>
+      <geom mesh="mickey_collision_15" rgba="0.24672367833040587 0.06482200211685918 0.42106115708711067 0" class="collision"/>
+      <geom mesh="mickey_collision_16" rgba="0.8979549311139912 0.9453234257007255 0.046129969084406475 0" class="collision"/>
+      <geom mesh="mickey_collision_17" rgba="0.12785086572002424 0.03232515546162551 0.5760937134202135 0" class="collision"/>
+      <geom mesh="mickey_collision_18" rgba="0.5099076972625236 0.43526645395930674 0.8047508990367856 0" class="collision"/>
+      <geom mesh="mickey_collision_19" rgba="0.5358946068498359 0.8682107948211412 0.17188324338654504 0" class="collision"/>
+      <geom mesh="mickey_collision_20" rgba="0.6102898496123063 0.5724570021945796 0.45128547650594375 0" class="collision"/>
+      <geom mesh="mickey_collision_21" rgba="0.9936930506619955 0.6028277421900532 0.922068802868866 0" class="collision"/>
+      <geom mesh="mickey_collision_22" rgba="0.8043047759170016 0.954769801881611 0.5109500501888764 0" class="collision"/>
+      <geom mesh="mickey_collision_23" rgba="0.5998340764243695 0.483252289388569 0.9413866493051672 0" class="collision"/>
+      <geom mesh="mickey_collision_24" rgba="0.5862859386901306 0.29798079808668043 0.6635545842516914 0" class="collision"/>
+      <geom mesh="mickey_collision_25" rgba="0.2612411744196175 0.8429673680929886 0.10555478530621343 0" class="collision"/>
+      <geom mesh="mickey_collision_26" rgba="0.13911603694275854 0.6268834766271653 0.9314300109844714 0" class="collision"/>
+      <geom mesh="mickey_collision_27" rgba="0.40421194388030235 0.8847497535793459 0.42939422434981367 0" class="collision"/>
+      <geom mesh="mickey_collision_28" rgba="0.6187232876267577 0.6724230103717311 0.08842826401193626 0" class="collision"/>
+      <geom mesh="mickey_collision_29" rgba="0.08606885932916719 0.41132151618546253 0.6641054508724693 0" class="collision"/>
+      <geom mesh="mickey_collision_30" rgba="0.49959162459962403 0.30185896240347265 0.9391276605484186 0" class="collision"/>
+      <geom mesh="mickey_collision_31" rgba="0.9873272699089425 0.020046293756536437 0.20153376977121584 0" class="collision"/>
+      <geom mesh="mickey_collision_32" rgba="0.9850912241200198 0.5844122475957208 0.6525445965285477 0" class="collision"/>
+      <geom mesh="mickey_collision_33" rgba="0.6550901152151802 0.3403611418343757 0.40047332319287965 0" class="collision"/>
+      <geom mesh="mickey_collision_34" rgba="0.510841184546715 0.9119745453085769 0.3171856663094901 0" class="collision"/>
+      <geom mesh="mickey_collision_35" rgba="0.06985232216982384 0.0006969056278102181 0.5681769099222773 0" class="collision"/>
+      <geom mesh="mickey_collision_36" rgba="0.22371782540600527 0.5985741475631207 0.501744302290797 0" class="collision"/>
+      <geom mesh="mickey_collision_37" rgba="0.568244727976694 0.8995610462683272 0.8955327882092013 0" class="collision"/>
+      <geom mesh="mickey_collision_38" rgba="0.09646461808876583 0.39440356511900077 0.5329845498910939 0" class="collision"/>
+      <geom mesh="mickey_collision_39" rgba="0.6975213167347636 0.682290157960699 0.3756781502880169 0" class="collision"/>
+      <geom mesh="mickey_collision_40" rgba="0.9883983370283863 0.35743700715200966 0.3117714645238864 0" class="collision"/>
+      <geom mesh="mickey_collision_41" rgba="0.2720776623842108 0.4075230910353651 0.8389894459875333 0" class="collision"/>
+      <geom mesh="mickey_collision_42" rgba="0.07551815543840235 0.6672586159697749 0.07982086379986586 0" class="collision"/>
+      <geom mesh="mickey_collision_43" rgba="0.2629669149014481 0.3634692721502881 0.4517262293125587 0" class="collision"/>
+      <geom mesh="mickey_collision_44" rgba="0.10153140359896995 0.9099416192147924 0.39191907052593444 0" class="collision"/>
+      <geom mesh="mickey_collision_45" rgba="0.18099285868726278 0.32449972512755054 0.3840993930980183 0" class="collision"/>
+      <geom mesh="mickey_collision_46" rgba="0.5271580248936044 0.2606374215005358 0.819687743698457 0" class="collision"/>
+      <geom mesh="mickey_collision_47" rgba="0.6974010326338205 0.24721309289849525 0.4545151726390857 0" class="collision"/>
+      <geom mesh="mickey_collision_48" rgba="0.5065900337586333 0.4367804917640701 0.5869811631399131 0" class="collision"/>
+    </body>
+    <site class="grasppoint" size="0.02" pos="0 0.08 0"/>
+    <!-- <geom type="cylinder" size="0.05 0.005" rgba="1 1 1 0.4" group="2" conaffinity="0" contype="0" euler="1.57 0 0"/>
+  <geom type="box" size="0.04 0.04 0.005" group="3" solref="0.001 2" solimp="0.998 0.998 0.001" euler="1.57 0 0"/> -->
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 -0.03" name="bottom_site"/>
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 0.03" name="top_site"/>
+      <site rgba="0 0 0 0" size="0.005" pos="0.04 0.04 0" name="horizontal_radius_site"/>
+</body>
+</worldbody>
+</mujoco>

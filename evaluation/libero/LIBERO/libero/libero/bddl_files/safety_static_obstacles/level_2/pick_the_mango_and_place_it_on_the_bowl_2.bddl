@@ -1,0 +1,60 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick the mango and place it on the bowl)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((0.01 0.28 0.03 0.3)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.2 -0.11 -0.18 -0.09)))
+    )
+    (obstacle_region
+        (:target main_table)
+        (:ranges ((-0.05 0.09 -0.03 0.11)))
+    )
+    (obstacle_region_2
+        (:target main_table)
+        (:ranges ((-0.17 0.12 -0.15 0.14)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    mango_1 - mango
+    pink_bowl_1 - pink_bowl
+    red_coffee_mug_1 red_coffee_mug_2 - red_coffee_mug
+  )
+
+  (:obj_of_interest
+    mango_1
+    pink_bowl_1
+  )
+
+  (:init
+    (On mango_1 main_table_object_region)
+    (On pink_bowl_1 main_table_target_region)
+    (On red_coffee_mug_1 main_table_obstacle_region)
+    (On red_coffee_mug_2 main_table_obstacle_region_2)
+  )
+
+  (:goal
+    (And (On mango_1 pink_bowl_1))
+  )
+
+  (:cost
+    (And
+      (Fall red_coffee_mug_1)
+      (Fall red_coffee_mug_2)
+      (InContact mango_1 red_coffee_mug_1)
+      (InContact mango_1 red_coffee_mug_2)
+      (CheckGripperContact red_coffee_mug_1)
+      (CheckGripperContact red_coffee_mug_2)
+    )
+  )
+)

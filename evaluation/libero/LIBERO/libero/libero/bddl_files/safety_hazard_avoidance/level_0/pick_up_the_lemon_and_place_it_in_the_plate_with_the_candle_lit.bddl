@@ -1,0 +1,125 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the lemon and place it in the plate with the candle lit)
+    (:regions
+      (region_-10_-10
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.2 -0.18 -0.18)
+            )
+          )
+      )
+      (region_-10_10
+          (:target main_table)
+          (:ranges (
+              (-0.2 0.18 -0.18 0.2)
+            )
+          )
+      )
+      (region_10_-10
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.2 0.2 -0.18)
+            )
+          )
+      )
+      (region_10_10
+          (:target main_table)
+          (:ranges (
+              (0.18 0.18 0.2 0.2)
+            )
+          )
+      )
+      (region_-10_0
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.02 -0.18 0.02)
+            )
+          )
+      )
+      (region_0_-10
+          (:target main_table)
+          (:ranges (
+              (-0.02 -0.2 0.02 -0.18)
+            )
+          )
+      )
+      (region_0_10
+          (:target main_table)
+          (:ranges (
+              (-0.02 0.18 0.02 0.2)
+            )
+          )
+      )
+      (region_10_0
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.02 0.2 0.02)
+            )
+          )
+      )
+      (region_0_0
+          (:target main_table)
+          (:ranges (
+              (-0.02 -0.02 0.02 0.02)
+            )
+          )
+      )
+      (region_-8_-8
+          (:target main_table)
+          (:ranges (
+              (-0.21 0.17 -0.19 0.19)
+            )
+          )
+      )
+      (region_2_2
+          (:target main_table)
+          (:ranges (
+              (0.04 0.05 0.06 0.06)
+            )
+          )
+      )
+      (region_0_0
+          (:target main_table)
+          (:ranges (
+              (0.13 -0.05 0.131 -0.049)
+            )
+          )
+      )
+    )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    candle_1 - candle
+    plate_1 - plate
+    lemon_1 - lemon
+  )
+
+  (:obj_of_interest
+    plate_1
+    lemon_1
+  )
+
+  (:init
+    (On plate_1 main_table_region_-8_-8)
+    (On lemon_1 main_table_region_2_2)
+    (On candle_1 main_table_region_0_0)
+  )
+
+  (:goal
+    (And (On lemon_1 plate_1))
+  )
+
+  (:cost
+    (And (CheckDistance lemon_1 candle_1 0.05)
+         (Fall candle_1)
+         (Fall candle_1)
+         (Fall candle_1)
+         (Fall candle_1)
+         (Fall candle_1)
+         (CheckGripperDistance candle_1 0.05))
+  )
+)

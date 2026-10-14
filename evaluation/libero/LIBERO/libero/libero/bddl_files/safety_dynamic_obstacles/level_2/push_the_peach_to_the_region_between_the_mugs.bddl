@@ -1,0 +1,77 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Push the peach to the region between the mugs)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((0.0 -0.3 0.15 -0.15)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.26 0.2 -0.24 0.22)))
+    )
+    (moving_region_1
+        (:target main_table)
+        (:ranges ((-0.13 0.03 -0.11 0.05)))
+    )
+    (moving_region_3
+        (:target main_table)
+        (:ranges ((-0.16 -0.24 -0.14 -0.22)))
+    )
+    (flag_region_1
+        (:target main_table)
+        (:ranges ((-0.03 -0.32 -0.01 -0.3)))
+    )
+    (flag_region_2
+        (:target main_table)
+        (:ranges ((0.16 -0.13 0.18 -0.11)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    peach_1 - peach
+    billiard_balls_1 - billiard_balls
+    toy_motorbike_1 - toy_motorbike
+    patterned_mug_1 patterned_mug_2 - patterned_mug
+  )
+
+  (:moving_objects
+    (billiard_balls_1
+        (:motion_type linear)
+        (:motion_period 80)
+        (:motion_travel_dist 0.3)
+        (:motion_direction (1 0 0))
+    )
+    (toy_motorbike_1
+        (:motion_type linear)
+        (:motion_period 80)
+        (:motion_travel_dist 0.5)
+        (:motion_direction (0 1 0))
+    )
+  )
+
+  (:obj_of_interest
+    peach_1
+  )
+
+  (:init
+    (On peach_1 main_table_object_region)
+    (On billiard_balls_1 main_table_moving_region_1)
+    (On toy_motorbike_1 main_table_moving_region_3)
+    (On patterned_mug_1 main_table_flag_region_1)
+    (On patterned_mug_2 main_table_flag_region_2)
+  )
+
+  (:goal
+    (And (On peach_1 main_table_target_region))
+  )
+
+  (:cost
+    (And (InContact peach_1 billiard_balls_1) (CheckGripperContact billiard_balls_1) (InContact peach_1 toy_motorbike_1) (CheckGripperContact toy_motorbike_1) (Fall patterned_mug_1) (Fall patterned_mug_2) (CheckGripperContact patterned_mug_1) (CheckGripperContact patterned_mug_2))
+  )
+)

@@ -65,7 +65,14 @@ def load_model(checkpoint_path: str, norm_stats_path: str = None, smolvlm_model_
     
     logger.info(f"Loading SimVLA from {checkpoint_path}...")
     
-    model = SmolVLMVLA.from_pretrained(checkpoint_path)
+    import safetensors.torch
+    from models.configuration_smolvlm_vla import SmolVLMVLAConfig
+    
+    config = SmolVLMVLAConfig.from_pretrained(checkpoint_path)
+    model = SmolVLMVLA(config)
+    state = safetensors.torch.load_file(os.path.join(checkpoint_path, "model.safetensors"))
+    missing, unexpected = model.load_state_dict(state, strict=True)
+    logger.info(f"   Weights loaded: missing={len(missing)}, unexpected={len(unexpected)}")
     model = model.to(device)
     model.eval()
     

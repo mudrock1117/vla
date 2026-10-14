@@ -1,0 +1,51 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Take out the apple on the ceramic plate, pick up the carrot on the cutting board and place it on the plate, then pick up the onion and place it on the cutting board)
+
+  (:regions
+    (target_region_1
+        (:target main_table)
+        (:ranges ((-0.28 -0.04 -0.26 -0.02)))
+    )
+    (target_region_2
+        (:target main_table)
+        (:ranges ((-0.03 0.17 -0.01 0.19)))
+    )
+    (object_region_1
+        (:target main_table)
+        (:ranges ((-0.03 -0.21 -0.01 -0.19)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    cutting_board_1 - cutting_board_no_rotation
+    onion_1 - onion
+    ceramic_plate_1 - ceramic_plate
+    carrot_1 - carrot
+    apple_1 - apple
+  )
+
+  (:obj_of_interest
+    cutting_board_1
+    onion_1
+    carrot_1
+    apple_1
+  )
+
+  (:init
+    (On cutting_board_1 main_table_target_region_1)
+    (On ceramic_plate_1 main_table_target_region_2)
+    (On carrot_1 cutting_board_1)
+    (On onion_1 main_table_object_region_1)
+    (On apple_1 ceramic_plate_1)
+  )
+
+  (:goal
+    (And (On onion_1 cutting_board_1) (On carrot_1 ceramic_plate_1))
+    (Not (On apple_1 ceramic_plate_1))
+  )
+)

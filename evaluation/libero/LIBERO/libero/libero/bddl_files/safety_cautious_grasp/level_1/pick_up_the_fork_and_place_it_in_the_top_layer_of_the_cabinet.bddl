@@ -1,0 +1,69 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the fork and place it in the top layer of the cabinet)
+    (:regions
+      (table_center
+          (:target main_table)
+          (:ranges (
+              (-0.1 0.07 -0.05 0.09)
+            )
+          )
+      )
+      (fork_region
+          (:target main_table)
+          (:ranges (
+              (-0.05 -0.29 -0.03 -0.27)
+            )
+          )
+      )
+      (milk_region
+          (:target main_table)
+          (:ranges (
+              (-0.15 0.08 -0.13 0.1)
+            )
+          )
+      )
+      (cabinet_region
+          (:target main_table)
+          (:ranges (
+              (-0.06 0.24 -0.04 0.26)
+            )
+          )
+          (:yaw_rotation (
+              (0.55 0.56)
+            )
+          )
+      )
+      (top_region
+        (:target white_cabinet_1)
+      )
+    )
+
+  (:fixtures
+    main_table - table
+    white_cabinet_1 - white_cabinet
+  )
+
+  (:objects
+    fork_1 - rotated_fork_pi
+  )
+
+  (:obj_of_interest
+    fork_1
+    white_cabinet_1
+  )
+
+  (:init
+    (On fork_1 main_table_fork_region)
+    (On white_cabinet_1 main_table_cabinet_region)
+    (Open white_cabinet_1_top_region)
+    )
+
+  (:goal
+    (And (In fork_1 white_cabinet_1_top_region))
+  )
+
+  (:cost
+    (And (CheckGripperDistancePart fork_1 (13 23 15 16 5) 0))
+  )
+)

@@ -1,0 +1,44 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the carrot and put it on the plate)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((-0.02 0.27 0.0 0.29)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.04 -0.28 -0.02 -0.26)))
+    )
+    (moving_region
+        (:target main_table)
+        (:ranges ((-0.14 -0.01 -0.12 0.01)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    carrot_1 - carrot
+    porcelain_plate_1 - porcelain_plate
+    mickey_1 - mickey
+  )
+
+  (:obj_of_interest
+    carrot_1
+    porcelain_plate_1
+  )
+
+  (:init
+    (On carrot_1 main_table_object_region)
+    (On porcelain_plate_1 main_table_target_region)
+    (On mickey_1 main_table_moving_region)
+  )
+
+  (:goal
+    (And (On carrot_1 porcelain_plate_1))
+  )
+)

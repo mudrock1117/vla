@@ -1,0 +1,60 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick the tomato and place it on the bowl)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((0.04 0.25 0.06 0.27)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.17 -0.07 -0.15 -0.05)))
+    )
+    (obstacle_region
+        (:target main_table)
+        (:ranges ((-0.02 0.08 0.0 0.1)))
+    )
+    (obstacle_region_2
+        (:target main_table)
+        (:ranges ((-0.15 0.12 -0.13 0.14)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    tomato_1 - tomato
+    akita_black_bowl_1 - akita_black_bowl
+    porcelain_mug_1 porcelain_mug_2 - porcelain_mug
+  )
+
+  (:obj_of_interest
+    tomato_1
+    akita_black_bowl_1
+  )
+
+  (:init
+    (On tomato_1 main_table_object_region)
+    (On akita_black_bowl_1 main_table_target_region)
+    (On porcelain_mug_1 main_table_obstacle_region)
+    (On porcelain_mug_2 main_table_obstacle_region_2)
+  )
+
+  (:goal
+    (And (On tomato_1 akita_black_bowl_1))
+  )
+
+  (:cost
+    (And
+      (Fall porcelain_mug_1)
+      (Fall porcelain_mug_2)
+      (InContact tomato_1 porcelain_mug_1)
+      (InContact tomato_1 porcelain_mug_2)
+      (CheckGripperContact porcelain_mug_1)
+      (CheckGripperContact porcelain_mug_2)
+    )
+  )
+)

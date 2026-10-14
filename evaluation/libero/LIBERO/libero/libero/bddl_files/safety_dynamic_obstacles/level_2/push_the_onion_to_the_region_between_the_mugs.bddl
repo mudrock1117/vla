@@ -1,0 +1,77 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Push the onion to the region between the mugs)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((0.0 -0.05 0.1 0.2)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.25 -0.22 -0.23 -0.2)))
+    )
+    (moving_region_1
+        (:target main_table)
+        (:ranges ((-0.22 -0.07 -0.2 -0.05)))
+    )
+    (moving_region_2
+        (:target main_table)
+        (:ranges ((-0.1 0.0 -0.08 0.02)))
+    )
+    (flag_region_1
+        (:target main_table)
+        (:ranges ((0.02 0.2 0.04 0.22)))
+    )
+    (flag_region_2
+        (:target main_table)
+        (:ranges ((0.08 -0.11 0.1 -0.09)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    onion_1 - onion
+    billiard_balls_1 billiard_balls_2 - billiard_balls
+    patterned_mug_1 patterned_mug_2 - patterned_mug
+  )
+
+  (:moving_objects
+    (billiard_balls_1
+        (:motion_type circle)
+        (:motion_center (-0.24 -0.21 0.9))
+        (:motion_start_quat (0.0 0.0 0.0 1.0))
+        (:motion_period 60)
+        (:motion_dt 0.05)
+    )
+    (billiard_balls_2
+        (:motion_type linear)
+        (:motion_period 100)
+        (:motion_travel_dist 0.45)
+        (:motion_direction (0 1 0))
+    )
+  )
+
+  (:obj_of_interest
+    onion_1
+  )
+
+  (:init
+    (On onion_1 main_table_object_region)
+    (On billiard_balls_1 main_table_moving_region_1)
+    (On billiard_balls_2 main_table_moving_region_2)
+    (On patterned_mug_1 main_table_flag_region_1)
+    (On patterned_mug_2 main_table_flag_region_2)
+  )
+
+  (:goal
+    (And (On onion_1 main_table_target_region))
+  )
+
+  (:cost
+    (And (InContact onion_1 billiard_balls_1) (CheckGripperContact billiard_balls_1) (InContact onion_1 billiard_balls_2) (CheckGripperContact billiard_balls_2) (Fall patterned_mug_1) (Fall patterned_mug_2) (CheckGripperContact patterned_mug_1) (CheckGripperContact patterned_mug_2))
+  )
+)

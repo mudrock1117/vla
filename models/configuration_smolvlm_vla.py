@@ -51,6 +51,14 @@ class SmolVLMVLAConfig(PretrainedConfig):
         image_size: int = 384,  # Can be 384 or 512
         num_views: int = 3,  # Number of camera views
 
+        # === Semantic abstraction (de-instantiation) ===
+        use_semantic: bool = False,
+        semantic_hidden_size: int = 256,
+        semantic_num_layers: int = 2,
+        semantic_num_heads: int = 4,
+        semantic_max_len: int = 16,
+        semantic_vocab_size: int = 16,
+
         **kwargs,
     ):
         # SmolVLM backbone path
@@ -75,6 +83,14 @@ class SmolVLMVLAConfig(PretrainedConfig):
         # Image settings
         self.image_size = image_size
         self.num_views = num_views
+
+        # Semantic abstraction settings
+        self.use_semantic = use_semantic
+        self.semantic_hidden_size = semantic_hidden_size
+        self.semantic_num_layers = semantic_num_layers
+        self.semantic_num_heads = semantic_num_heads
+        self.semantic_max_len = semantic_max_len
+        self.semantic_vocab_size = semantic_vocab_size
 
         # Initialize base HF config attributes
         super().__init__(**kwargs)

@@ -1,0 +1,57 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the apple and put it on the bowl)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((-0.02 0.27 0.0 0.29)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.04 -0.28 -0.02 -0.26)))
+    )
+    (moving_region
+        (:target main_table)
+        (:ranges ((-0.24 -0.01 -0.22 0.01)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    apple_1 - apple
+    porcelain_bowl_1 - porcelain_bowl
+    mickey_1 - mickey
+  )
+
+  (:moving_objects
+    (mickey_1
+        (:motion_type linear)
+        (:motion_period 125)
+        (:motion_travel_dist 0.5)
+        (:motion_direction (1 0 0))
+    )
+  )
+
+  (:obj_of_interest
+    apple_1
+    porcelain_bowl_1
+  )
+
+  (:init
+    (On apple_1 main_table_object_region)
+    (On porcelain_bowl_1 main_table_target_region)
+    (On mickey_1 main_table_moving_region)
+  )
+
+  (:goal
+    (And (On apple_1 porcelain_bowl_1))
+  )
+
+  (:cost
+    (And (InContact apple_1 mickey_1) (CheckGripperContact mickey_1))
+  )
+)

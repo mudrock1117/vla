@@ -1,0 +1,48 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Open the top drawer, then pick up the mango on the plate and put it on the drawer, close the drawer at last)
+
+  (:regions
+    (target_region_1
+        (:target main_table)
+        (:ranges ((-0.11 0.25 -0.09 0.27)))
+    )
+    (target_region_2
+        (:target main_table)
+        (:ranges ((-0.2 -0.17 -0.18 -0.15)))
+    )
+    (object_region_1
+        (:target main_table)
+        (:ranges ((-0.1 -0.21 -0.08 -0.19)))
+    )
+    (top_region
+        (:target white_cabinet_1)
+    )
+  )
+
+  (:fixtures
+    main_table - table
+    white_cabinet_1 - white_cabinet
+  )
+
+  (:objects
+    mango_1 - mango
+    porcelain_plate_1 - porcelain_plate
+  )
+
+  (:obj_of_interest
+    white_cabinet_1
+    mango_1
+    porcelain_plate_1
+  )
+
+  (:init
+    (On white_cabinet_1 main_table_target_region_1)
+    (On porcelain_plate_1 main_table_target_region_2)
+    (On mango_1 porcelain_plate_1)
+  )
+
+  (:goal
+    (And (In mango_1 white_cabinet_1_top_region) (Close white_cabinet_1_top_region))
+  )
+)

@@ -1,0 +1,53 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up all of the apples and place them in the box)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((-0.01 0.22 0.01 0.24)))
+    )
+    (object_region_1
+        (:target main_table)
+        (:ranges ((-0.06 -0.19 -0.04 -0.17)))
+    )
+    (object_region_2
+        (:target main_table)
+        (:ranges ((-0.16 -0.09 -0.14 -0.07)))
+    )
+    (object_region_3
+        (:target main_table)
+        (:ranges ((-0.04 -0.03 -0.02 -0.01)))
+    )
+    (contain_region
+        (:target box_1)
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    apple_1 apple_2 apple_3 - apple
+    box_1 - box
+  )
+
+  (:obj_of_interest
+    box_1
+    apple_1
+    apple_2
+    apple_3
+  )
+
+  (:init
+    (On box_1 main_table_target_region)
+    (On apple_1 main_table_object_region_1)
+    (On apple_2 main_table_object_region_3)
+    (On apple_3 main_table_object_region_2)
+  )
+
+  (:goal
+    (And (In apple_1 box_1_contain_region) (In apple_2 box_1_contain_region) (In apple_3 box_1_contain_region))
+  )
+)

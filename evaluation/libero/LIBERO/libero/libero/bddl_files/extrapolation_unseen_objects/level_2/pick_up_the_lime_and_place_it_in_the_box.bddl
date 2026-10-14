@@ -1,0 +1,92 @@
+(define (problem Floor_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the lime and place it in the box)
+    (:regions
+      (bin_region
+          (:target floor)
+          (:ranges (
+              (-0.01 0.25 0.01 0.27)
+            )
+          )
+      )
+      (target_object_region
+          (:target floor)
+          (:ranges (
+              (-0.145 -0.265 -0.095 -0.215)
+            )
+          )
+      )
+      (other_object_region_0
+          (:target floor)
+          (:ranges (
+              (0.025 -0.075 0.07500000000000001 -0.02500000000000001)
+            )
+          )
+      )
+      (other_object_region_1
+          (:target floor)
+          (:ranges (
+              (-0.175 0.034999999999999996 -0.125 0.08499999999999999)
+            )
+          )
+      )
+      (other_object_region_2
+          (:target floor)
+          (:ranges (
+              (0.1 -0.225 0.15 -0.17500000000000002)
+            )
+          )
+      )
+      (other_object_region_3
+          (:target floor)
+          (:ranges (
+              (0.075 0.025 0.125 0.075)
+            )
+          )
+      )
+      (other_object_region_4
+          (:target floor)
+          (:ranges (
+              (-0.225 -0.10500000000000001 -0.17500000000000002 -0.055)
+            )
+          )
+      )
+      (contain_region
+          (:target box_1)
+      )
+    )
+
+  (:fixtures
+    floor - floor
+  )
+
+  (:objects
+    apple_1 - apple
+    box_1 - box
+    broccoli_1 - broccoli
+    lime_1 - lime
+    bagel_1 - bagel
+    chiffon_cake_1 - chiffon_cake
+    cereal_1 - cereal
+  )
+
+  (:obj_of_interest
+    lime_1
+    box_1
+  )
+
+  (:init
+    (On apple_1 floor_target_object_region)
+    (On lime_1 floor_other_object_region_0)
+    (On bagel_1 floor_other_object_region_1)
+    (On cereal_1 floor_other_object_region_2)
+    (On chiffon_cake_1 floor_other_object_region_3)
+    (On broccoli_1 floor_other_object_region_4)
+    (On box_1 floor_bin_region)
+  )
+
+  (:goal
+    (And (In lime_1 box_1_contain_region))
+  )
+
+)

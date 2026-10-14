@@ -1,0 +1,41 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the banana and place it in the box)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((-0.01 0.19 0.01 0.21)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.06 -0.19 -0.04 -0.17)))
+    )
+    (contain_region
+        (:target box_1)
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    banana_1 - banana
+    box_1 - box
+  )
+
+  (:obj_of_interest
+    box_1
+    banana_1
+  )
+
+  (:init
+    (On box_1 main_table_target_region)
+    (On banana_1 main_table_object_region)
+  )
+
+  (:goal
+    (And (In banana_1 box_1_contain_region))
+  )
+)

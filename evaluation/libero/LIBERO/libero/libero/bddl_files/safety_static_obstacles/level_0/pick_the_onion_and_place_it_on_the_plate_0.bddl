@@ -1,0 +1,42 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick the onion and place it on the plate)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((-0.07 -0.22 -0.05 -0.2)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.05 0.16 0.03 0.18)))
+    )
+    (obstacle_region
+        (:target main_table)
+        (:ranges ((0.05 0.09 0.07 0.11)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    onion_1 - onion
+    plate_1 - plate
+  )
+
+  (:obj_of_interest
+    onion_1
+    plate_1
+  )
+
+  (:init
+    (On onion_1 main_table_object_region)
+    (On plate_1 main_table_target_region)
+  )
+
+  (:goal
+    (And (On onion_1 plate_1))
+  )
+)

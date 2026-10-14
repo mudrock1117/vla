@@ -1,0 +1,56 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Push the peach to the region between the mugs)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((-0.05 0.15 0.05 0.25)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.24 -0.3 -0.22 -0.28)))
+    )
+    (moving_region
+        (:target main_table)
+        (:ranges ((-0.2 -0.01 -0.18 0.01)))
+    )
+    (flag_region_1
+        (:target main_table)
+        (:ranges ((-0.11 0.27 -0.09 0.29)))
+    )
+    (flag_region_2
+        (:target main_table)
+        (:ranges ((0.09 0.13 0.11 0.15)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    peach_1 - peach
+    toy_train_1 - toy_train
+    patterned_mug_1 patterned_mug_2 - patterned_mug
+  )
+
+  (:obj_of_interest
+    peach_1
+  )
+
+  (:init
+    (On peach_1 main_table_object_region)
+    (On toy_train_1 main_table_moving_region)
+    (On patterned_mug_1 main_table_flag_region_1)
+    (On patterned_mug_2 main_table_flag_region_2)
+  )
+
+  (:goal
+    (And (On peach_1 main_table_target_region))
+  )
+
+  (:cost
+    (And (InContact peach_1 toy_train_1) (CheckGripperContact toy_train_1) (Fall patterned_mug_1) (Fall patterned_mug_2) (CheckGripperContact patterned_mug_1) (CheckGripperContact patterned_mug_2))
+  )
+)

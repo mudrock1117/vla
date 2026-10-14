@@ -1,0 +1,55 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Take the mango out of the drawer and pick up the peaches and place it in the drawer, then close the drawer)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((-0.11 0.25 -0.09 0.27)))
+    )
+    (object_region_1
+        (:target main_table)
+        (:ranges ((-0.1 -0.21 -0.08 -0.19)))
+    )
+    (object_region_2
+        (:target main_table)
+        (:ranges ((-0.2 -0.12 -0.18 -0.1)))
+    )
+    (top_region
+        (:target white_cabinet_1)
+    )
+    (table_region
+        (:target main_table)
+        (:ranges ((-1 -1 1 1)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+    white_cabinet_1 - white_cabinet
+  )
+
+  (:objects
+    mango_1 - mango
+    peach_1 peach_2 - peach
+  )
+
+  (:obj_of_interest
+    white_cabinet_1
+    peach_1
+    peach_2
+    mango_1
+  )
+
+  (:init
+    (On white_cabinet_1 main_table_target_region)
+    (On peach_1 main_table_object_region_1)
+    (On peach_2 main_table_object_region_2)
+    (Open white_cabinet_1_top_region)
+    (In mango_1 white_cabinet_1_top_region)
+  )
+
+  (:goal
+    (And (In peach_1 white_cabinet_1_top_region) (In peach_2 white_cabinet_1_top_region) (Close white_cabinet_1_top_region) (On mango_1 main_table_table_region))
+  )
+)

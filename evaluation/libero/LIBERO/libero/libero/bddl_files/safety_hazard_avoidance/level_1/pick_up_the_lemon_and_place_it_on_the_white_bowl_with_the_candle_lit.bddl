@@ -1,0 +1,125 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the lemon and place it on the white bowl with the candle lit)
+    (:regions
+      (region_-10_-10
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.2 -0.18 -0.18)
+            )
+          )
+      )
+      (region_-10_10
+          (:target main_table)
+          (:ranges (
+              (-0.2 0.18 -0.18 0.2)
+            )
+          )
+      )
+      (region_10_-10
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.2 0.2 -0.18)
+            )
+          )
+      )
+      (region_10_10
+          (:target main_table)
+          (:ranges (
+              (0.18 0.18 0.2 0.2)
+            )
+          )
+      )
+      (region_-10_0
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.02 -0.18 0.02)
+            )
+          )
+      )
+      (region_0_-10
+          (:target main_table)
+          (:ranges (
+              (-0.02 -0.2 0.02 -0.18)
+            )
+          )
+      )
+      (region_0_10
+          (:target main_table)
+          (:ranges (
+              (-0.02 0.18 0.02 0.2)
+            )
+          )
+      )
+      (region_10_0
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.02 0.2 0.02)
+            )
+          )
+      )
+      (region_0_0
+          (:target main_table)
+          (:ranges (
+              (0.04 0.02 0.06 0.04)
+            )
+          )
+      )
+      (region_-8_-8
+          (:target main_table)
+          (:ranges (
+              (-0.26 -0.28 -0.24 -0.26)
+            )
+          )
+      )
+      (region_2_2
+          (:target main_table)
+          (:ranges (
+              (0.04 0.04 0.06 0.06)
+            )
+          )
+      )
+      (region_-8_0
+          (:target main_table)
+          (:ranges (
+              (-0.16 -0.04 -0.14 -0.02)
+            )
+          )
+      )
+    )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    white_bowl_1 - white_bowl
+    lemon_1 - lemon
+    candle_1 - candle
+  )
+
+  (:obj_of_interest
+    white_bowl_1
+    lemon_1
+  )
+
+  (:init
+    (On white_bowl_1 main_table_region_-8_-8)
+    (On lemon_1 main_table_region_0_0)
+    (On candle_1 main_table_region_-8_0)
+  )
+
+  (:goal
+    (And (On lemon_1 white_bowl_1))
+  )
+
+  (:cost
+    (And (CheckDistance lemon_1 candle_1 0.2)
+         (Fall candle_1)
+         (Fall candle_1)
+         (Fall candle_1)
+         (Fall candle_1)
+         (Fall candle_1)
+         (CheckGripperDistance candle_1 0.05))
+  )
+)

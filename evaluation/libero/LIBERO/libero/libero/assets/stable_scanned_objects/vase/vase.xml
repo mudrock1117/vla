@@ -1,0 +1,194 @@
+<mujoco model="vase">
+  <default>
+    <default class="visual">
+      <geom group="1" type="mesh" contype="0" conaffinity="0" density="100" />
+    </default>
+    <default class="collision">
+      <geom group="0" type="mesh" solref="0.001 1" solimp="0.998 0.998 0.001" density="100" />
+    </default>
+    <default class="placepoint">
+        <site type="sphere" size="0.01" group="2" rgba="1 0 0 0"/>
+    </default>
+    <default class="keypoint">
+        <site type="sphere" size="0.01" group="3" rgba="1 0 0 1"/>
+    </default>
+  </default>
+  <asset>
+    <texture type="2d" name="vase" file="./visual/vase.png" />
+    <material name="DefaultMaterial" texture="vase" specular="0.5" shininess="0.25" />
+    <mesh file="./visual/vase.obj" scale="0.045 0.045 0.045" name="vase" />
+    <mesh file="./collision/vase_collision_0.obj" scale="0.045 0.045 0.045" name="vase_collision_0" />
+<mesh file="./collision/vase_collision_1.obj" scale="0.045 0.045 0.045" name="vase_collision_1" />
+<mesh file="./collision/vase_collision_2.obj" scale="0.045 0.045 0.045" name="vase_collision_2" />
+<mesh file="./collision/vase_collision_3.obj" scale="0.045 0.045 0.045" name="vase_collision_3" />
+<mesh file="./collision/vase_collision_4.obj" scale="0.045 0.045 0.045" name="vase_collision_4" />
+<mesh file="./collision/vase_collision_5.obj" scale="0.045 0.045 0.045" name="vase_collision_5" />
+<mesh file="./collision/vase_collision_6.obj" scale="0.045 0.045 0.045" name="vase_collision_6" />
+<mesh file="./collision/vase_collision_7.obj" scale="0.045 0.045 0.045" name="vase_collision_7" />
+<mesh file="./collision/vase_collision_8.obj" scale="0.045 0.045 0.045" name="vase_collision_8" />
+<mesh file="./collision/vase_collision_9.obj" scale="0.045 0.045 0.045" name="vase_collision_9" />
+<mesh file="./collision/vase_collision_10.obj" scale="0.045 0.045 0.045" name="vase_collision_10" />
+<mesh file="./collision/vase_collision_11.obj" scale="0.045 0.045 0.045" name="vase_collision_11" />
+<mesh file="./collision/vase_collision_12.obj" scale="0.045 0.045 0.045" name="vase_collision_12" />
+<mesh file="./collision/vase_collision_13.obj" scale="0.045 0.045 0.045" name="vase_collision_13" />
+<mesh file="./collision/vase_collision_14.obj" scale="0.045 0.045 0.045" name="vase_collision_14" />
+<mesh file="./collision/vase_collision_15.obj" scale="0.045 0.045 0.045" name="vase_collision_15" />
+<mesh file="./collision/vase_collision_16.obj" scale="0.045 0.045 0.045" name="vase_collision_16" />
+<mesh file="./collision/vase_collision_17.obj" scale="0.045 0.045 0.045" name="vase_collision_17" />
+<mesh file="./collision/vase_collision_18.obj" scale="0.045 0.045 0.045" name="vase_collision_18" />
+<mesh file="./collision/vase_collision_19.obj" scale="0.045 0.045 0.045" name="vase_collision_19" />
+<mesh file="./collision/vase_collision_20.obj" scale="0.045 0.045 0.045" name="vase_collision_20" />
+<mesh file="./collision/vase_collision_21.obj" scale="0.045 0.045 0.045" name="vase_collision_21" />
+<mesh file="./collision/vase_collision_22.obj" scale="0.045 0.045 0.045" name="vase_collision_22" />
+<mesh file="./collision/vase_collision_23.obj" scale="0.045 0.045 0.045" name="vase_collision_23" />
+<mesh file="./collision/vase_collision_24.obj" scale="0.045 0.045 0.045" name="vase_collision_24" />
+<mesh file="./collision/vase_collision_25.obj" scale="0.045 0.045 0.045" name="vase_collision_25" />
+<mesh file="./collision/vase_collision_26.obj" scale="0.045 0.045 0.045" name="vase_collision_26" />
+<mesh file="./collision/vase_collision_27.obj" scale="0.045 0.045 0.045" name="vase_collision_27" />
+<mesh file="./collision/vase_collision_28.obj" scale="0.045 0.045 0.045" name="vase_collision_28" />
+<mesh file="./collision/vase_collision_29.obj" scale="0.045 0.045 0.045" name="vase_collision_29" />
+<mesh file="./collision/vase_collision_30.obj" scale="0.045 0.045 0.045" name="vase_collision_30" />
+<mesh file="./collision/vase_collision_31.obj" scale="0.045 0.045 0.045" name="vase_collision_31" />
+<mesh file="./collision/vase_collision_32.obj" scale="0.045 0.045 0.045" name="vase_collision_32" />
+<mesh file="./collision/vase_collision_33.obj" scale="0.045 0.045 0.045" name="vase_collision_33" />
+<mesh file="./collision/vase_collision_34.obj" scale="0.045 0.045 0.045" name="vase_collision_34" />
+<mesh file="./collision/vase_collision_35.obj" scale="0.045 0.045 0.045" name="vase_collision_35" />
+<mesh file="./collision/vase_collision_36.obj" scale="0.045 0.045 0.045" name="vase_collision_36" />
+<mesh file="./collision/vase_collision_37.obj" scale="0.045 0.045 0.045" name="vase_collision_37" />
+<mesh file="./collision/vase_collision_38.obj" scale="0.045 0.045 0.045" name="vase_collision_38" />
+<mesh file="./collision/vase_collision_39.obj" scale="0.045 0.045 0.045" name="vase_collision_39" />
+<mesh file="./collision/vase_collision_40.obj" scale="0.045 0.045 0.045" name="vase_collision_40" />
+<mesh file="./collision/vase_collision_41.obj" scale="0.045 0.045 0.045" name="vase_collision_41" />
+<mesh file="./collision/vase_collision_42.obj" scale="0.045 0.045 0.045" name="vase_collision_42" />
+<mesh file="./collision/vase_collision_43.obj" scale="0.045 0.045 0.045" name="vase_collision_43" />
+<mesh file="./collision/vase_collision_44.obj" scale="0.045 0.045 0.045" name="vase_collision_44" />
+<mesh file="./collision/vase_collision_45.obj" scale="0.045 0.045 0.045" name="vase_collision_45" />
+<mesh file="./collision/vase_collision_46.obj" scale="0.045 0.045 0.045" name="vase_collision_46" />
+<mesh file="./collision/vase_collision_47.obj" scale="0.045 0.045 0.045" name="vase_collision_47" />
+<mesh file="./collision/vase_collision_48.obj" scale="0.045 0.045 0.045" name="vase_collision_48" />
+<mesh file="./collision/vase_collision_49.obj" scale="0.045 0.045 0.045" name="vase_collision_49" />
+<mesh file="./collision/vase_collision_50.obj" scale="0.045 0.045 0.045" name="vase_collision_50" />
+<mesh file="./collision/vase_collision_51.obj" scale="0.045 0.045 0.045" name="vase_collision_51" />
+<mesh file="./collision/vase_collision_52.obj" scale="0.045 0.045 0.045" name="vase_collision_52" />
+<mesh file="./collision/vase_collision_53.obj" scale="0.045 0.045 0.045" name="vase_collision_53" />
+<mesh file="./collision/vase_collision_54.obj" scale="0.045 0.045 0.045" name="vase_collision_54" />
+<mesh file="./collision/vase_collision_55.obj" scale="0.045 0.045 0.045" name="vase_collision_55" />
+<mesh file="./collision/vase_collision_56.obj" scale="0.045 0.045 0.045" name="vase_collision_56" />
+<mesh file="./collision/vase_collision_57.obj" scale="0.045 0.045 0.045" name="vase_collision_57" />
+<mesh file="./collision/vase_collision_58.obj" scale="0.045 0.045 0.045" name="vase_collision_58" />
+<mesh file="./collision/vase_collision_59.obj" scale="0.045 0.045 0.045" name="vase_collision_59" />
+<mesh file="./collision/vase_collision_60.obj" scale="0.045 0.045 0.045" name="vase_collision_60" />
+<mesh file="./collision/vase_collision_61.obj" scale="0.045 0.045 0.045" name="vase_collision_61" />
+<mesh file="./collision/vase_collision_62.obj" scale="0.045 0.045 0.045" name="vase_collision_62" />
+<mesh file="./collision/vase_collision_63.obj" scale="0.045 0.045 0.045" name="vase_collision_63" />
+<mesh file="./collision/vase_collision_64.obj" scale="0.045 0.045 0.045" name="vase_collision_64" />
+<mesh file="./collision/vase_collision_65.obj" scale="0.045 0.045 0.045" name="vase_collision_65" />
+<mesh file="./collision/vase_collision_66.obj" scale="0.045 0.045 0.045" name="vase_collision_66" />
+<mesh file="./collision/vase_collision_67.obj" scale="0.045 0.045 0.045" name="vase_collision_67" />
+<mesh file="./collision/vase_collision_68.obj" scale="0.045 0.045 0.045" name="vase_collision_68" />
+<mesh file="./collision/vase_collision_69.obj" scale="0.045 0.045 0.045" name="vase_collision_69" />
+<mesh file="./collision/vase_collision_70.obj" scale="0.045 0.045 0.045" name="vase_collision_70" />
+<mesh file="./collision/vase_collision_71.obj" scale="0.045 0.045 0.045" name="vase_collision_71" />
+<mesh file="./collision/vase_collision_72.obj" scale="0.045 0.045 0.045" name="vase_collision_72" />
+<mesh file="./collision/vase_collision_73.obj" scale="0.045 0.045 0.045" name="vase_collision_73" />
+<mesh file="./collision/vase_collision_74.obj" scale="0.045 0.045 0.045" name="vase_collision_74" />
+<mesh file="./collision/vase_collision_75.obj" scale="0.045 0.045 0.045" name="vase_collision_75" />
+<mesh file="./collision/vase_collision_76.obj" scale="0.045 0.045 0.045" name="vase_collision_76" />
+<mesh file="./collision/vase_collision_77.obj" scale="0.045 0.045 0.045" name="vase_collision_77" />
+<mesh file="./collision/vase_collision_78.obj" scale="0.045 0.045 0.045" name="vase_collision_78" />
+<mesh file="./collision/vase_collision_79.obj" scale="0.045 0.045 0.045" name="vase_collision_79" />
+  </asset>
+  <worldbody>
+  <body>
+    <body name="object" pos="0 0 0.15">
+      <geom material="DefaultMaterial" mesh="vase" class="visual" />
+      <geom mesh="vase_collision_0" rgba="0.46518418924888283 0.7252424749742825 0.002124875949967575 1" class="collision" />
+      <geom mesh="vase_collision_1" rgba="0.9793295412925422 0.06305230669207207 0.9995751850410002 1" class="collision" />
+      <geom mesh="vase_collision_2" rgba="0.4819954722848405 0.9401199473280313 0.5453195485484658 1" class="collision" />
+      <geom mesh="vase_collision_3" rgba="0.8725515713244285 0.6532325640276417 0.6177338966655728 1" class="collision" />
+      <geom mesh="vase_collision_4" rgba="0.34998242192426054 0.21489853539446235 0.8235818296810216 1" class="collision" />
+      <geom mesh="vase_collision_5" rgba="0.107497981487365 0.6470395632952054 0.9987245405343941 1" class="collision" />
+      <geom mesh="vase_collision_6" rgba="0.9332177046614432 0.4935623943023466 0.8523115647857951 1" class="collision" />
+      <geom mesh="vase_collision_7" rgba="0.569309972959828 0.2615264713367782 0.5763195471963184 1" class="collision" />
+      <geom mesh="vase_collision_8" rgba="0.24861013619000638 0.20731708775737445 0.8508639882143852 1" class="collision" />
+      <geom mesh="vase_collision_9" rgba="0.286771574478072 0.5140904682003427 0.05369217907802226 1" class="collision" />
+      <geom mesh="vase_collision_10" rgba="0.9519541254469548 0.09949386099772806 0.2852696475566002 1" class="collision" />
+      <geom mesh="vase_collision_11" rgba="0.7383600144958403 0.20733411599332796 0.5665782076151237 1" class="collision" />
+      <geom mesh="vase_collision_12" rgba="0.9237339519899231 0.21314869644259837 0.38823711017564233 1" class="collision" />
+      <geom mesh="vase_collision_13" rgba="0.8023399951966719 0.04047111169816453 0.5667103349346342 1" class="collision" />
+      <geom mesh="vase_collision_14" rgba="0.5109568649399263 0.2631547401296329 0.725922514090954 1" class="collision" />
+      <geom mesh="vase_collision_15" rgba="0.2016251752879854 0.22271594252359816 0.5646989039746588 1" class="collision" />
+      <geom mesh="vase_collision_16" rgba="0.551282870801717 0.6177401518819102 0.9673400697863274 1" class="collision" />
+      <geom mesh="vase_collision_17" rgba="0.00797642449072733 0.2575865406802784 0.9308509450940071 1" class="collision" />
+      <geom mesh="vase_collision_18" rgba="0.4149364075523345 0.22842597776379858 0.5029611675467559 1" class="collision" />
+      <geom mesh="vase_collision_19" rgba="0.25377721726607283 0.21548829193363817 0.6439092648066155 1" class="collision" />
+      <geom mesh="vase_collision_20" rgba="0.43818321256983483 0.44423569337948277 0.24378813537612576 1" class="collision" />
+      <geom mesh="vase_collision_21" rgba="0.8368435909162745 0.7445599355269246 0.26140443048852624 1" class="collision" />
+      <geom mesh="vase_collision_22" rgba="0.69381133459297 0.5232227842532965 0.044082921760133176 1" class="collision" />
+      <geom mesh="vase_collision_23" rgba="0.015011366852505148 0.4873978059932309 0.41387213123217115 1" class="collision" />
+      <geom mesh="vase_collision_24" rgba="0.3286887633030665 0.677630121898308 0.6094496323478998 1" class="collision" />
+      <geom mesh="vase_collision_25" rgba="0.19796953315344745 0.8400010951058093 0.31226029538303623 1" class="collision" />
+      <geom mesh="vase_collision_26" rgba="0.24132423323103702 0.02050567081773691 0.6163616989338974 1" class="collision" />
+      <geom mesh="vase_collision_27" rgba="0.515834262890051 0.9841185613765482 0.5148264289346104 1" class="collision" />
+      <geom mesh="vase_collision_28" rgba="0.7910840382083532 0.13766761805080574 0.1277354824503013 1" class="collision" />
+      <geom mesh="vase_collision_29" rgba="0.9517531930690575 0.07246656517240135 0.12458677541538354 1" class="collision" />
+      <geom mesh="vase_collision_30" rgba="0.24479540133608269 0.20456494246675827 0.3570338557927607 1" class="collision" />
+      <geom mesh="vase_collision_31" rgba="0.39089438764121054 0.32411128949905177 0.4529360944638001 1" class="collision" />
+      <geom mesh="vase_collision_32" rgba="0.6112425441452969 0.3760490306029207 0.437023819691136 1" class="collision" />
+      <geom mesh="vase_collision_33" rgba="0.7166234835047837 0.4758479990879544 0.42176750029138343 1" class="collision" />
+      <geom mesh="vase_collision_34" rgba="0.38655734586648394 0.021017383008751778 0.20578070638126544 1" class="collision" />
+      <geom mesh="vase_collision_35" rgba="0.7024089843409518 0.363226174113225 0.023874119575572728 1" class="collision" />
+      <geom mesh="vase_collision_36" rgba="0.5097079019289371 0.8434726817648103 0.9612718967867389 1" class="collision" />
+      <geom mesh="vase_collision_37" rgba="0.784620041036653 0.14722757427913347 0.7502395015804555 1" class="collision" />
+      <geom mesh="vase_collision_38" rgba="0.12250269960057525 0.039491886397577614 0.066685977698003 1" class="collision" />
+      <geom mesh="vase_collision_39" rgba="0.1275264926957992 0.5564696088826832 0.4656216648161089 1" class="collision" />
+      <geom mesh="vase_collision_40" rgba="0.1629118004031248 0.10734590581995529 0.9441787091222044 1" class="collision" />
+      <geom mesh="vase_collision_41" rgba="0.190445502758134 0.5133069776428778 0.05741130780161674 1" class="collision" />
+      <geom mesh="vase_collision_42" rgba="0.25362041720880857 0.9553883919307722 0.08043069292206206 1" class="collision" />
+      <geom mesh="vase_collision_43" rgba="0.9146743938972194 0.8686109901337543 0.5868081286880068 1" class="collision" />
+      <geom mesh="vase_collision_44" rgba="0.760391519620741 0.4624883244917981 0.06672382749915107 1" class="collision" />
+      <geom mesh="vase_collision_45" rgba="0.9974281047443089 0.837354058681745 0.7841968165917302 1" class="collision" />
+      <geom mesh="vase_collision_46" rgba="0.19734221796684748 0.3475239932713329 0.7369952223865749 1" class="collision" />
+      <geom mesh="vase_collision_47" rgba="0.06290968919007978 0.36786619484723493 0.2994235296994797 1" class="collision" />
+      <geom mesh="vase_collision_48" rgba="0.7800671323593731 0.8661953562968616 0.08829715053025433 1" class="collision" />
+      <geom mesh="vase_collision_49" rgba="0.07323108964626768 0.9564272691652609 0.7163885697744029 1" class="collision" />
+      <geom mesh="vase_collision_50" rgba="0.3244523787800768 0.14896606789080968 0.2892747403564151 1" class="collision" />
+      <geom mesh="vase_collision_51" rgba="0.21267084523618063 0.6711346769309073 0.43758733721823506 1" class="collision" />
+      <geom mesh="vase_collision_52" rgba="0.3030477913805859 0.936515493504605 0.0755712159727554 1" class="collision" />
+      <geom mesh="vase_collision_53" rgba="0.5258511385032998 0.07641984719961792 0.028381596910362128 1" class="collision" />
+      <geom mesh="vase_collision_54" rgba="0.8407011773974125 0.016980569821403058 0.722180026457689 1" class="collision" />
+      <geom mesh="vase_collision_55" rgba="0.18517228556362597 0.1721727078157852 0.9030425641916914 1" class="collision" />
+      <geom mesh="vase_collision_56" rgba="0.7854364158634872 0.6062641420197964 0.033368430555631545 1" class="collision" />
+      <geom mesh="vase_collision_57" rgba="0.3460527147126503 0.5600525140055966 0.013544696133741985 1" class="collision" />
+      <geom mesh="vase_collision_58" rgba="0.7024013822660901 0.19191382876314544 0.024477787196714007 1" class="collision" />
+      <geom mesh="vase_collision_59" rgba="0.4858208109223888 0.22743508737279983 0.37028292246159167 1" class="collision" />
+      <geom mesh="vase_collision_60" rgba="0.9347380946947719 0.8897542903916634 0.3663496141352529 1" class="collision" />
+      <geom mesh="vase_collision_61" rgba="0.31898383242688677 0.6962726304741687 0.18364652322788289 1" class="collision" />
+      <geom mesh="vase_collision_62" rgba="0.631947189849358 0.8369822658221411 0.9927737156613784 1" class="collision" />
+      <geom mesh="vase_collision_63" rgba="0.3913405000706136 0.6968435431397653 0.12928980676258295 1" class="collision" />
+      <geom mesh="vase_collision_64" rgba="0.1308795666699184 0.5397798218229871 0.33068648610962836 1" class="collision" />
+      <geom mesh="vase_collision_65" rgba="0.8060672055297738 0.7014868289039955 0.719725411208987 1" class="collision" />
+      <geom mesh="vase_collision_66" rgba="0.9184359580824082 0.35739115807275845 0.6470408562572492 1" class="collision" />
+      <geom mesh="vase_collision_67" rgba="0.2561129046480479 0.6063692340058413 0.858032679609758 1" class="collision" />
+      <geom mesh="vase_collision_68" rgba="0.1258802254587904 0.5138934184398973 0.3785619491905927 1" class="collision" />
+      <geom mesh="vase_collision_69" rgba="0.8510540175937279 0.4255472851403116 0.1232652354247763 1" class="collision" />
+      <geom mesh="vase_collision_70" rgba="0.3974551543748174 0.8672309904104615 0.15612395017822012 1" class="collision" />
+      <geom mesh="vase_collision_71" rgba="0.9583102186310702 0.5592443015425886 0.8986433850677508 1" class="collision" />
+      <geom mesh="vase_collision_72" rgba="0.05369691153095102 0.2361694575283334 0.09276068920091751 1" class="collision" />
+      <geom mesh="vase_collision_73" rgba="0.024145925767207643 0.6387354717533412 0.4805393578594489 1" class="collision" />
+      <geom mesh="vase_collision_74" rgba="0.001334601130786539 0.40933987961465446 0.8138914152957332 1" class="collision" />
+      <geom mesh="vase_collision_75" rgba="0.320658995955331 0.1605137069745034 0.5142062621572204 1" class="collision" />
+      <geom mesh="vase_collision_76" rgba="0.6732353367858397 0.9743437357300843 0.3503392222530357 1" class="collision" />
+      <geom mesh="vase_collision_77" rgba="0.4824617924815735 0.019804455535263332 0.9114778101482458 1" class="collision" />
+      <geom mesh="vase_collision_78" rgba="0.9356107439693119 0.49251161218781647 0.4950237615560378 1" class="collision" />
+      <geom mesh="vase_collision_79" rgba="0.6283203231566474 0.9320837197793862 0.6967384959317082 1" class="collision" />
+    </body>
+    <site class="keypoint" pos="0.04 0.04 0.3"/>
+    <site class="keypoint" pos="-0.04 -0.04 0"/>
+    <site class="placepoint" pos="0 0 0.45"/>
+    <site rgba="0 0 0 0" size="0.005" pos="0 0 -0.12" name="bottom_site" />
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 0.12" name="top_site" />
+      <site rgba="0 0 0 0" size="0.005" pos="0.02 0.02 0" name="horizontal_radius_site" />
+  </body>  
+  </worldbody>
+</mujoco>

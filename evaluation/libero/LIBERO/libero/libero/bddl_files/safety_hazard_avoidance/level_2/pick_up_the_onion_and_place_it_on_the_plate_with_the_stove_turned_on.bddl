@@ -1,0 +1,128 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the onion and place it on the plate with the stove turned on)
+    (:regions
+      (region_-10_-10
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.2 -0.18 -0.18)
+            )
+          )
+      )
+      (region_-10_10
+          (:target main_table)
+          (:ranges (
+              (-0.2 0.18 -0.18 0.2)
+            )
+          )
+      )
+      (region_10_-10
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.2 0.2 -0.18)
+            )
+          )
+      )
+      (region_10_10
+          (:target main_table)
+          (:ranges (
+              (0.18 0.18 0.2 0.2)
+            )
+          )
+      )
+      (region_-10_0
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.02 -0.18 0.02)
+            )
+          )
+      )
+      (region_0_-10
+          (:target main_table)
+          (:ranges (
+              (-0.02 -0.2 0.02 -0.18)
+            )
+          )
+      )
+      (region_0_10
+          (:target main_table)
+          (:ranges (
+              (-0.02 0.18 0.02 0.2)
+            )
+          )
+      )
+      (region_10_0
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.02 0.2 0.02)
+            )
+          )
+      )
+      (region_0_0
+          (:target main_table)
+          (:ranges (
+              (-0.02 -0.02 0.02 0.02)
+            )
+          )
+      )
+      (region_-8_-8
+          (:target main_table)
+          (:ranges (
+              (-0.16 -0.16 -0.14 -0.14)
+            )
+          )
+      )
+      (region_2_2
+          (:target main_table)
+          (:ranges (
+              (-0.04 0.24 -0.02 0.26)
+            )
+          )
+      )
+      (region_-8_0
+          (:target main_table)
+          (:ranges (
+              (-0.1 -0.32 -0.08 -0.3)
+            )
+          )
+      )
+      (region_-4_-4
+          (:target main_table)
+          (:ranges (
+              (-0.18 0.1 -0.16 0.12)
+            )
+          )
+      )
+    )
+
+  (:fixtures
+    main_table - table
+    flat_stove_1 - flat_stove
+  )
+
+  (:objects
+    plate_1 - plate
+    onion_1 - onion
+  )
+
+  (:obj_of_interest
+    plate_1
+    onion_1
+  )
+
+  (:init
+    (On plate_1 main_table_region_-8_0)
+    (On onion_1 main_table_region_2_2)
+    (On flat_stove_1 main_table_region_-4_-4)
+    (Turnon flat_stove_1)
+  )
+
+  (:goal
+    (And (On onion_1 plate_1))
+  )
+
+  (:cost
+    (And (CheckDistance onion_1 flat_stove_1 0.05)
+         (CheckGripperDistance flat_stove_1 0.05))
+  )
+)

@@ -1,0 +1,57 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the knife and place it on the top of the cabinet)
+    (:regions
+      (table_center
+          (:target main_table)
+          (:ranges (
+              (-0.1 0.07 -0.05 0.09)
+            )
+          )
+      )
+      (knife_region
+          (:target main_table)
+          (:ranges (
+              (-0.05 -0.29 -0.03 -0.27)
+            )
+          )
+      )
+      (milk_region
+          (:target main_table)
+          (:ranges (
+              (-0.15 0.08 -0.13 0.1)
+            )
+          )
+      )
+      (top_side
+          (:target white_cabinet_1)
+      )
+    )
+
+  (:fixtures
+    main_table - table
+    white_cabinet_1 - white_cabinet
+  )
+
+  (:objects
+    knife_1 - knife_n
+  )
+
+  (:obj_of_interest
+    knife_1
+    white_cabinet_1
+  )
+
+  (:init
+    (On knife_1 main_table_knife_region)
+    (On white_cabinet_1 main_table_table_center)
+    )
+
+  (:goal
+    (And (On knife_1 white_cabinet_1))
+  )
+
+  (:cost
+    (And (CheckGripperDistancePart knife_1 (3 9 12 22 32 25 27) 0.01))
+  )
+)

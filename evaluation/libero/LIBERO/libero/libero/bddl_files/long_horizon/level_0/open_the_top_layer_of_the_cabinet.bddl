@@ -1,0 +1,34 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Open the top layer of the cabinet)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((0.03 0.19 0.05 0.21)))
+    )
+    (top_region
+        (:target white_cabinet_1)
+    )
+  )
+
+  (:fixtures
+    main_table - table
+    white_cabinet_1 - white_cabinet
+  )
+
+  (:objects
+  )
+
+  (:obj_of_interest
+    white_cabinet_1
+  )
+
+  (:init
+    (On white_cabinet_1 main_table_target_region)
+  )
+
+  (:goal
+    (And (Open white_cabinet_1_top_region))
+  )
+)

@@ -1,0 +1,54 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the fork and place it on the cutting board)
+    (:regions
+      (table_center
+          (:target main_table)
+          (:ranges (
+              (-0.17 -0.17 -0.15 -0.15)
+            )
+          )
+      )
+      (fork_region
+          (:target main_table)
+          (:ranges (
+              (-0.09 0.26 -0.07 0.28)
+            )
+          )
+      )
+      (milk_region
+          (:target main_table)
+          (:ranges (
+              (-0.15 0.08 -0.13 0.1)
+            )
+          )
+      )
+    )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    fork_1 - rotated_fork
+    cutting_board_1 - cutting_board
+  )
+
+  (:obj_of_interest
+    fork_1
+    cutting_board_1
+  )
+
+  (:init
+    (On fork_1 main_table_fork_region)
+    (On cutting_board_1 main_table_table_center)
+    )
+
+  (:goal
+    (And (On fork_1 cutting_board_1))
+  )
+
+  (:cost
+    (And (CheckGripperDistancePart fork_1 (13 23 15 16 5) 0))
+  )
+)

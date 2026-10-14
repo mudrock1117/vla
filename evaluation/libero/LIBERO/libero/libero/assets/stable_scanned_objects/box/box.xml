@@ -1,0 +1,102 @@
+<mujoco model="box">
+  <default>
+    <default class="visual">
+      <geom group="1"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh"/>
+    </default>
+  </default>
+  
+  <asset>
+    <texture type="2d" name="box" file="box.png"/>
+    <material name="Material" texture="box" specular="0.5" shininess="0.25"/>
+    
+    <!-- Visual mesh -->
+    <mesh name="box" file="box.obj" scale="0.11 0.11 0.11"/>
+    
+    <!-- Collision meshes -->
+    <mesh name="box_collision_0" file="box_collision_0.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_1" file="box_collision_1.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_2" file="box_collision_2.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_3" file="box_collision_3.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_4" file="box_collision_4.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_5" file="box_collision_5.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_6" file="box_collision_6.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_7" file="box_collision_7.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_8" file="box_collision_8.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_9" file="box_collision_9.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_10" file="box_collision_10.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_11" file="box_collision_11.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_12" file="box_collision_12.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_13" file="box_collision_13.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_14" file="box_collision_14.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_15" file="box_collision_15.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_16" file="box_collision_16.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_17" file="box_collision_17.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_18" file="box_collision_18.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_19" file="box_collision_19.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_20" file="box_collision_20.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_21" file="box_collision_21.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_22" file="box_collision_22.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_23" file="box_collision_23.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_24" file="box_collision_24.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_25" file="box_collision_25.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_26" file="box_collision_26.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_27" file="box_collision_27.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_28" file="box_collision_28.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_29" file="box_collision_29.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_30" file="box_collision_30.obj" scale="0.11 0.11 0.11"/>
+    <mesh name="box_collision_31" file="box_collision_31.obj" scale="0.11 0.11 0.11"/>
+  </asset>
+  
+  <worldbody>
+    <!-- Main container body with sites -->
+    <body name="container">
+      <!-- Three required sites for manipulation tasks -->
+      <site name="bottom_site" pos="0 0.0 -0.14" size="0.01" rgba="1 0 0 0.5"/>
+      <site name="top_site" pos="0 0 0.0" size="0.01" rgba="0 1 0 0.5"/>
+      <site name="horizontal_radius_site" pos="0.05 0.05 0" size="0.01" rgba="0 0 1 0.5"/>
+      <!-- Object body -->
+      <body name="object">
+      <site type="box" pos="0.01000 -0.06 -0.03" quat="0.00000 0.00000 0.00000 1.00000" size="0.075 0.075 0.06949" group="0" rgba="0.8 0 0 0" name="contain_region"/>
+        <!-- Visual geometry -->
+        <geom material="Material" mesh="box" group="1" type="mesh" contype="0" conaffinity="0" density="1000"/>
+        
+        <!-- Collision geometries -->
+        <geom mesh="box_collision_0" rgba="0.5046905420101823 0.6462405940749628 0.8582325294476613 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_1" rgba="0.8191558383321568 0.40682171409852985 0.2819093002146027 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_2" rgba="0.9225222743572898 0.9964208368082623 0.3927468455014451 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_3" rgba="0.3095243173011566 0.052192370537778365 0.20084480195967036 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_4" rgba="0.28240873049720516 0.5654320919811576 0.9239092189509723 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_5" rgba="0.5520255658548299 0.4213243069628698 0.6267697680825193 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_6" rgba="0.2915835446389665 0.25895148519190003 0.5432239796270516 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_7" rgba="0.007052686128652508 0.6698620867825904 0.7848223380878389 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_8" rgba="0.8280541425506893 0.7636484921580788 0.9167408700848512 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_9" rgba="0.9808349637010225 0.36320589315499496 0.6224509351808817 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_10" rgba="0.30491125636826855 0.2130123406479576 0.7058787676666787 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_11" rgba="0.11825884079305512 0.3286622330516926 0.7271335745682395 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_12" rgba="0.11094880137292834 0.456197837826926 0.02043721068553217 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_13" rgba="0.113461822781751331 0.4041440640889916 0.4713657546564015 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_14" rgba="0.37928172435651986 0.8009505720655065 0.9129032989810401 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_15" rgba="0.5451054095094956 0.6673666145092759 0.8185902545471154 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_16" rgba="0.112149718443807533 0.5377486038084315 0.9972194261546379 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_17" rgba="0.43149071798769534 0.018501916433846688 0.38389455794590754 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_18" rgba="0.8425243339506352 0.808101183187101 0.115572940387418255 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_19" rgba="0.5528260034050724 0.48877390397937404 0.40265733482093413 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_20" rgba="0.9762045243162257 0.8793423643821606 0.21671345130076214 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_21" rgba="0.25804006890593567 0.9094719489586485 0.9881570906893613 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_22" rgba="0.4957613754476863 0.06299374076470188 0.5434332042134473 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_23" rgba="0.8186396666960446 0.3763876426566889 0.11326668802583265 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_24" rgba="0.5253640692555565 0.9727277142728081 0.378411266400804 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_25" rgba="0.5627199979252363 0.5750021556749481 0.709342618836145 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_26" rgba="0.7488304747835514 0.9687459210486796 0.5805231829127443 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_27" rgba="0.42638737998248777 0.30793189806504084 0.9425406052970271 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_28" rgba="0.04246420188759614 0.32511196691006194 0.04509928020016807 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_29" rgba="0.8336139078849629 0.8418195563942655 0.111157227192648456 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_30" rgba="0.9818272630155849 0.11103079601893927 0.6277320160274831 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+        <geom mesh="box_collision_31" rgba="0.110095240383786874 0.9156765699348564 0.5567000547227378 0" group="0"  solref="0.02 1" solimp="0.9 0.95 0.001" type="mesh" density="1000"/>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>

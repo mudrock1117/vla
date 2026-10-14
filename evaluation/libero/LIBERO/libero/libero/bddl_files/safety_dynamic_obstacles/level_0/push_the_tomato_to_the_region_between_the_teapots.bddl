@@ -1,0 +1,56 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Push the tomato to the region between the teapots)
+
+  (:regions
+    (target_region
+        (:target main_table)
+        (:ranges ((0.0 0.05 0.1 0.25)))
+    )
+    (object_region
+        (:target main_table)
+        (:ranges ((-0.31 -0.2 -0.29 -0.18)))
+    )
+    (moving_region
+        (:target main_table)
+        (:ranges ((-0.18 -0.05 -0.16 -0.03)))
+    )
+    (flag_region_1
+        (:target main_table)
+        (:ranges ((0.05 0.3 0.07 0.32)))
+    )
+    (flag_region_2
+        (:target main_table)
+        (:ranges ((0.01 -0.01 0.03 0.01)))
+    )
+  )
+
+  (:fixtures
+    main_table - table
+  )
+
+  (:objects
+    tomato_1 - tomato
+    toy_motorbike_1 - toy_motorbike
+    teapot_1 teapot_2 - teapot
+  )
+
+  (:obj_of_interest
+    tomato_1
+  )
+
+  (:init
+    (On tomato_1 main_table_object_region)
+    (On toy_motorbike_1 main_table_moving_region)
+    (On teapot_1 main_table_flag_region_1)
+    (On teapot_2 main_table_flag_region_2)
+  )
+
+  (:goal
+    (And (On tomato_1 main_table_target_region))
+  )
+
+  (:cost
+    (And (InContact tomato_1 toy_motorbike_1) (CheckGripperContact toy_motorbike_1) (Fall teapot_1) (Fall teapot_2) (CheckGripperContact teapot_1) (CheckGripperContact teapot_2))
+  )
+)

@@ -1,0 +1,122 @@
+(define (problem Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick up the kiwi and place it on the white bowl with the stove turned on)
+    (:regions
+      (region_-10_-10
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.2 -0.18 -0.18)
+            )
+          )
+      )
+      (region_-10_10
+          (:target main_table)
+          (:ranges (
+              (-0.2 0.18 -0.18 0.2)
+            )
+          )
+      )
+      (region_10_-10
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.2 0.2 -0.18)
+            )
+          )
+      )
+      (region_10_10
+          (:target main_table)
+          (:ranges (
+              (0.18 0.18 0.2 0.2)
+            )
+          )
+      )
+      (region_-10_0
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.02 -0.18 0.02)
+            )
+          )
+      )
+      (region_0_-10
+          (:target main_table)
+          (:ranges (
+              (-0.02 -0.2 0.02 -0.18)
+            )
+          )
+      )
+      (region_0_10
+          (:target main_table)
+          (:ranges (
+              (-0.02 0.18 0.02 0.2)
+            )
+          )
+      )
+      (region_10_0
+          (:target main_table)
+          (:ranges (
+              (0.18 -0.02 0.2 0.02)
+            )
+          )
+      )
+      (region_0_0
+          (:target main_table)
+          (:ranges (
+              (-0.02 -0.02 0.02 0.02)
+            )
+          )
+      )
+      (region_-8_-8
+          (:target main_table)
+          (:ranges (
+              (-0.3 -0.25 -0.28 -0.23)
+            )
+          )
+      )
+      (region_2_2
+          (:target main_table)
+          (:ranges (
+              (0.14 0.14 0.16 0.16)
+            )
+          )
+      )
+      (region_0_0
+          (:target main_table)
+          (:ranges (
+              (-0.2 -0.09 -0.18 -0.07)
+            )
+          )
+      )
+    )
+
+  (:fixtures
+    main_table - table
+    flat_stove_1 - flat_stove
+  )
+
+  (:objects
+    white_bowl_1 - white_bowl
+    kiwi_1 - kiwi
+  )
+
+  (:obj_of_interest
+    white_bowl_1
+    kiwi_1
+  )
+
+  (:init
+    (On white_bowl_1 main_table_region_2_2)
+    (On kiwi_1 main_table_region_0_0)
+    (On flat_stove_1 main_table_region_-8_-8)
+    (Turnon flat_stove_1)
+  )
+
+  (:goal
+    (And (On kiwi_1 white_bowl_1))
+  )
+
+  (:cost
+    (And (CheckDistance kiwi_1 flat_stove_1 0.05)
+         (CheckGripperDistance flat_stove_1 0.05)
+    )
+  )
+)

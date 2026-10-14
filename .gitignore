@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+checkpoints/
+datasets/
+eval_results/
+evaluation/libero/eval_results/
+evaluation/libero/eval_libero*.log
+*.vlap
+!datasets/metas/*.json
+!datasets/metas/*.md
+!datasets/metas/.gitattributes
