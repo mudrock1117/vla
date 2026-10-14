@@ -175,6 +175,73 @@ def get_libero_task(task_name: str):
     return None, None, None
 
 
+def collect_from_hdf5(hdf5_path, owl_pipe, processor, task_name, instruction, det_every=5, max_steps=100):
+    try:
+        import h5py
+    except ImportError:
+        print("  ⚠️ h5py not installed, skipping HDF5")
+        return None
+
+    if not os.path.exists(hdf5_path):
+        return None
+
+    f = h5py.File(hdf5_path, "r")
+    demo_keys = sorted(f["data"].keys(), key=lambda x: int(x.split("_")[1]))
+    if not demo_keys:
+        f.close()
+        return None
+
+    trajectory = []
+    cached_vs = None
+
+    for dk in demo_keys[:3]:
+        demo = f[f"data/{dk}"]
+        actions = np.array(demo["actions"])
+        agent_imgs = np.array(demo["obs/agentview_rgb"])
+        wrist_imgs = np.array(demo["obs/eye_in_hand_rgb"])
+        ee_pos = np.array(demo["obs/ee_pos"])
+        ee_ori = np.array(demo["obs/ee_ori"])
+        gripper = np.array(demo["obs/gripper_states"])
+
+        n = min(len(actions), max_steps)
+        with torch.no_grad():
+            for t in range(n):
+                img = agent_imgs[t][::-1, ::-1]
+                wrist_img = wrist_imgs[t][::-1, ::-1]
+
+                state = np.concatenate([ee_pos[t], ee_ori[t], gripper[t]])
+
+                images, image_mask = preprocess_images(img, wrist_img)
+                proprio = torch.tensor(state, dtype=torch.float32).unsqueeze(0).to(device)
+
+                if owl_pipe is not None and t % det_every == 0:
+                    try:
+                        dets = detect_objects(owl_pipe, img, confidence_threshold=0.05)
+                        cached_vs = build_visual_semantic(
+                            dets, img.shape[0], img.shape[1],
+                            step_idx=t, total_steps=n,
+                            prev_vs=cached_vs,
+                        )
+                    except Exception:
+                        cached_vs = VisualSemantic(image_width=img.shape[1], image_height=img.shape[0])
+
+                expert_action = torch.tensor(actions[t], dtype=torch.float32).unsqueeze(0).unsqueeze(0).to(device)
+
+                trajectory.append({
+                    "images": images,
+                    "image_mask": image_mask,
+                    "proprio": proprio,
+                    "instruction": instruction,
+                    "input_ids": processor.encode_language([instruction])["input_ids"].cpu(),
+                    "abstract_ids": parse_instruction(instruction),
+                    "visual_semantic": _serialize_vs(cached_vs) if cached_vs is not None else None,
+                    "teacher_action": expert_action,
+                })
+
+    f.close()
+    return trajectory if trajectory else None
+
+
 def collect_trajectory(model_base, owl_pipe, processor, task_name, num_steps=100, det_every=5):
     task, suite, task_id = get_libero_task(task_name)
     if task is None:
@@ -319,12 +386,11 @@ def main():
         print("\nLoading OWL-ViT for visual grounding ...")
         owl_pipe = load_owl_vit_pipeline(device=device)
 
-    splits_to_collect = ["ID", "OOD-Composition", "OOD-Both"]
+    splits_to_collect = ["ID"]
     all_traj = []
-    K8_NAME = "KITCHEN_SCENE8_put_both_moka_pots_on_the_stove"
 
     print(f"\n{'='*60}")
-    print("Collecting trajectories with baseline + OWL-ViT ...")
+    print("Collecting trajectories from LIBERO expert demos (ID only) ...")
     print(f"{'='*60}")
 
     for split_name in splits_to_collect:
@@ -336,36 +402,40 @@ def main():
         print(f"\n=== {split_name} ({len(tasks)} tasks) ===")
         for entry in tasks:
             name = entry["task_name"]
-            n_repeat = 3 if name == K8_NAME else 1
-            for rep in range(n_repeat):
-                vs_info = ""
-                t0 = time.time()
+            hdf5_path = entry.get("hdf5_path", "")
+            instruction = entry.get("semantic", {}).get(
+                "instruction",
+                entry.get("language", name.replace("_", " "))
+            )
+            t0 = time.time()
+            traj = None
+            if hdf5_path and os.path.exists(hdf5_path):
+                traj = collect_from_hdf5(
+                    hdf5_path, owl_pipe, processor, name, instruction,
+                    det_every=args.det_every, max_steps=args.traj_steps,
+                )
+                source = "HDF5"
+            else:
                 traj = collect_trajectory(
                     model_base, owl_pipe, processor, name,
                     num_steps=args.traj_steps, det_every=args.det_every,
                 )
-                dt = time.time() - t0
-                if traj is not None and len(traj) > 3:
-                    all_traj.extend(traj)
-                    k8_tag = " [K8]" if "moka_pots" in name or "moka pots" in name else ""
-                    print(f"  ✅ {name[:48]:48s} {len(traj):3d} steps {dt:.1f}s{k8_tag}")
-                else:
-                    print(f"  ❌ {name[:48]:48s} SKIP")
+                source = "SIM"
+            dt = time.time() - t0
+            if traj is not None and len(traj) > 3:
+                all_traj.extend(traj)
+                print(f"  ✅ {name[:48]:48s} {len(traj):3d} steps {dt:.1f}s [{source}]")
+            else:
+                print(f"  ❌ {name[:48]:48s} SKIP")
 
-    k8_count = sum(1 for t in all_traj if "moka_pots" in t.get("instruction", "").replace(" ", "_"))
     vs_count = sum(1 for t in all_traj if t.get("visual_semantic") is not None)
-    print(f"\nTotal: {len(all_traj)} samples, K8={k8_count}, VisualSemantic provided={vs_count}")
+    print(f"\nTotal: {len(all_traj)} samples, VisualSemantic provided={vs_count}")
 
     if len(all_traj) < args.batch_size:
         print("❌ Not enough samples.")
         return
 
-    # K8 加 5x 权重，其他 1x
-    sample_weights = np.array([
-        5.0 if "moka_pots" in t.get("instruction", "").replace(" ", "_") else 1.0
-        for t in all_traj
-    ], dtype=np.float32)
-    sample_weights /= sample_weights.sum()
+    sample_weights = None
 
     optimizer = torch.optim.AdamW(
         [p for p in model_triple.parameters() if p.requires_grad],
