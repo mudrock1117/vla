@@ -19,6 +19,7 @@ from typing import Any, Dict
 
 import numpy as np
 import torch
+import torch.nn.functional as F
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from PIL import Image
@@ -426,6 +427,7 @@ class SmolVLMVLA(PreTrainedModel):
         sem_embeds = sem_embeds.to(device=device, dtype=dtype)
 
         sem_pooled = sem_embeds.mean(dim=1, keepdim=True)
+        sem_pooled = sem_pooled / (sem_pooled.norm(dim=-1, keepdim=True) + 1e-6)
         alpha_sem = torch.sigmoid(self.semantic_alpha)
 
         combined_text = text_embeds + alpha_sem * sem_pooled
@@ -438,6 +440,7 @@ class SmolVLMVLA(PreTrainedModel):
             if self.visual_proj is not None:
                 vis_tokens = self.visual_proj(vis_tokens)
             vis_tokens = vis_tokens.to(device=device, dtype=dtype)
+            vis_tokens = vis_tokens / (vis_tokens.norm(dim=-1, keepdim=True) + 1e-6)
             alpha_vis = torch.sigmoid(self.visual_alpha)
             extra_vis_tokens = alpha_vis * vis_tokens
 
