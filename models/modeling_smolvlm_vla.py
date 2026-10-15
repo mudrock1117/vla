@@ -513,7 +513,7 @@ class SmolVLMVLA(PreTrainedModel):
         4) Model predicts v_t, compute MSE(v_t, u_t)
         """
         if abstract_task_ids is not None and self.use_semantic:
-            enc = self.forward_vlm_semantic(image_input, image_mask, abstract_task_ids)
+            enc = self.forward_vlm_semantic(image_input, image_mask, input_ids, abstract_task_ids)
         else:
             enc = self.forward_vlm_efficient(image_input, image_mask, input_ids)
 
