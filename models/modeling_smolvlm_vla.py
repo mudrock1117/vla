@@ -432,21 +432,31 @@ class SmolVLMVLA(PreTrainedModel):
 
         combined_text = text_embeds + alpha_sem * sem_pooled
 
-        # ========== Visual Semantic: object tokens appended to image features ==========
+        # ========== Visual Semantic: pooled residual injected into image features ==========
         alpha_vis = torch.tensor(0.0, device=device, dtype=dtype)
-        extra_vis_tokens = None
+        vis_residual_per_sample = None
         if self.use_visual_semantic and self.visual_semantic_encoder is not None and visual_semantics is not None:
             vis_tokens = self.visual_semantic_encoder(visual_semantics)
             if self.visual_proj is not None:
                 vis_tokens = self.visual_proj(vis_tokens)
             vis_tokens = vis_tokens.to(device=device, dtype=dtype)
-            vis_tokens = vis_tokens / (vis_tokens.norm(dim=-1, keepdim=True) + 1e-6)
-            alpha_vis = torch.sigmoid(self.visual_alpha)
-            extra_vis_tokens = alpha_vis * vis_tokens
 
             vis_mask = getattr(self.visual_semantic_encoder, '_last_mask', None)
             if vis_mask is None:
                 vis_mask = torch.ones(B, vis_tokens.size(1), device=device, dtype=torch.long)
+
+            pooled_list = []
+            for b in range(B):
+                valid = vis_tokens[b][vis_mask[b].bool()]
+                if valid.size(0) > 0:
+                    pooled = valid.mean(dim=0, keepdim=True)
+                else:
+                    pooled = torch.zeros(1, hidden_size, device=device, dtype=dtype)
+                pooled_list.append(pooled)
+            vis_pooled = torch.cat(pooled_list, dim=0)
+            vis_pooled = vis_pooled / (vis_pooled.norm(dim=-1, keepdim=True) + 1e-6)
+            alpha_vis = torch.sigmoid(self.visual_alpha)
+            vis_residual_per_sample = alpha_vis * vis_pooled
 
         # ========== Build combined sequence per sample ==========
         batch_inputs_embeds = []
@@ -457,23 +467,14 @@ class SmolVLMVLA(PreTrainedModel):
             sample_image_feats = full_image_features[b, :num_valid].reshape(-1, hidden_size)
             sample_text_feats = combined_text[b]
 
-            parts = [sample_image_feats]
-            if extra_vis_tokens is not None:
-                vm = vis_mask[b]
-                valid_vis = extra_vis_tokens[b][vm.bool()]
-                if valid_vis.size(0) > 0:
-                    parts.append(valid_vis)
+            if vis_residual_per_sample is not None:
+                sample_image_feats = sample_image_feats + vis_residual_per_sample[b:b+1]
 
-            sample_vis_masks = [torch.ones(sample_image_feats.size(0), device=device, dtype=torch.long)]
-            if extra_vis_tokens is not None:
-                vm = vis_mask[b]
-                sample_vis_masks.append(vm[vm.bool()])
-
-            combined = torch.cat(parts, dim=0) if len(parts) > 1 else parts[0]
+            image_mask_b = torch.ones(sample_image_feats.size(0), device=device, dtype=torch.long)
             text_mask = torch.ones(sample_text_feats.size(0), device=device, dtype=torch.long)
-            full_mask = torch.cat(sample_vis_masks + [text_mask], dim=0)
+            full_mask = torch.cat([image_mask_b, text_mask], dim=0)
 
-            batch_inputs_embeds.append(torch.cat([combined, sample_text_feats], dim=0))
+            batch_inputs_embeds.append(torch.cat([sample_image_feats, sample_text_feats], dim=0))
             batch_attention_masks.append(full_mask)
             max_seq_len = max(max_seq_len, batch_inputs_embeds[-1].shape[0])
 
