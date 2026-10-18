@@ -426,7 +426,8 @@ class SmolVLMVLA(PreTrainedModel):
             sem_embeds = self.semantic_proj(sem_embeds)
         sem_embeds = sem_embeds.to(device=device, dtype=dtype)
 
-        sem_pooled = sem_embeds.mean(dim=1, keepdim=True)
+        sem_mask = (abstract_task_ids != 0).float().unsqueeze(-1).to(dtype=dtype)
+        sem_pooled = (sem_embeds * sem_mask).sum(dim=1, keepdim=True) / (sem_mask.sum(dim=1, keepdim=True) + 1e-6)
         sem_pooled = sem_pooled / (sem_pooled.norm(dim=-1, keepdim=True) + 1e-6)
         alpha_sem = torch.sigmoid(self.semantic_alpha)
 
