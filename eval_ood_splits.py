@@ -244,7 +244,7 @@ def eval_split(model, processor, split_path: str, num_trials: int = 10, seed: in
 
         bddl_file = Path(get_libero_path("bddl_files")) / task.problem_folder / task.bddl_file
         init_states = suite.get_task_init_states(task_id)
-        instruction = task.language
+        instruction = entry.get("instruction", task.language)
 
         print(f"  Loading: {task_name[:55]:55s}", end=" ", flush=True)
         task_success = 0

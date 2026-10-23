@@ -58,6 +58,8 @@ class SmolVLMVLAConfig(PretrainedConfig):
         semantic_num_heads: int = 4,
         semantic_max_len: int = 16,
         semantic_vocab_size: int = 16,
+        use_semantic_extractor: bool = False,
+        semantic_extract_layer: int = 16,
 
         **kwargs,
     ):
@@ -91,6 +93,8 @@ class SmolVLMVLAConfig(PretrainedConfig):
         self.semantic_num_heads = semantic_num_heads
         self.semantic_max_len = semantic_max_len
         self.semantic_vocab_size = semantic_vocab_size
+        self.use_semantic_extractor = use_semantic_extractor
+        self.semantic_extract_layer = semantic_extract_layer
 
         # Initialize base HF config attributes
         super().__init__(**kwargs)

@@ -125,10 +125,25 @@ class SmolVLMVLA(PreTrainedModel):
                 self.semantic_proj = nn.Linear(config.semantic_hidden_size, vlm_hidden_size)
             import torch.nn as nn
             self.semantic_alpha = nn.Parameter(torch.tensor(0.0))
-            logging.info(f"✓ Semantic abstraction enabled: "
-                         f"hidden={config.semantic_hidden_size}, "
-                         f"proj={'needed' if self.semantic_proj is not None else 'direct'}, "
-                         f"alpha=0 (sigmoid=0.5)")
+            if getattr(config, 'use_semantic_extractor', False):
+                from .semantic_extractor import SemanticExtractor
+                text_hidden_size = self.vlm.model.text_model.config.hidden_size
+                self.semantic_extractor = SemanticExtractor(
+                    hidden_size=text_hidden_size,
+                    bottleneck=getattr(config, 'semantic_hidden_size', 256),
+                )
+                self.semantic_extract_layer = getattr(config, 'semantic_extract_layer', 16)
+                for p in self.vlm.model.text_model.parameters():
+                    p.requires_grad = False
+                logging.info(f"✓ SemanticExtractor (LLM hidden-based) enabled: "
+                             f"layer={self.semantic_extract_layer}, "
+                             f"text_frozen=True")
+            else:
+                self.semantic_extractor = None
+                logging.info(f"✓ Semantic abstraction enabled: "
+                             f"hidden={config.semantic_hidden_size}, "
+                             f"proj={'needed' if self.semantic_proj is not None else 'direct'}, "
+                             f"alpha=0 (sigmoid=0.5)")
 
         # Visual Grounding Semantic Encoder (detected objects + counts + positions)
         self.use_visual_semantic: bool = getattr(config, 'use_visual_semantic', False)
@@ -383,7 +398,7 @@ class SmolVLMVLA(PreTrainedModel):
         If use_visual_semantic=True and visual_semantics provided → triple residual.
         Otherwise → original dual residual (text + semantic only).
         """
-        if not self.use_semantic or self.semantic_task_encoder is None:
+        if not self.use_semantic or (self.semantic_task_encoder is None and self.semantic_extractor is None):
             raise RuntimeError("Semantic mode not enabled.")
 
         if pixel_values.dim() == 6:
@@ -415,22 +430,42 @@ class SmolVLMVLA(PreTrainedModel):
         full_image_features = full_image_features.view(B, V, num_patches, hidden_size)
         valid_per_sample = image_mask.sum(dim=1).int()
 
-        # ========== Text embeddings (ORIGINAL, keep baseline capability) ==========
+        # ========== Text path: baseline text embeddings ==========
         text_embeds = self.vlm.model.text_model.get_input_embeddings()(input_ids)
         text_embeds = text_embeds.to(dtype=dtype)
 
-        # ========== Text Semantic residual ==========
-        sem_out = self.semantic_task_encoder(abstract_task_ids)
-        sem_embeds = sem_out["task_features"]
-        if self.semantic_proj is not None:
-            sem_embeds = self.semantic_proj(sem_embeds)
-        sem_embeds = sem_embeds.to(device=device, dtype=dtype)
-
-        sem_mask = (abstract_task_ids != 0).float().unsqueeze(-1).to(dtype=dtype)
-        sem_pooled = (sem_embeds * sem_mask).sum(dim=1, keepdim=True) / (sem_mask.sum(dim=1, keepdim=True) + 1e-6)
-        sem_pooled = sem_pooled / (sem_pooled.norm(dim=-1, keepdim=True) + 1e-6)
+        # ========== Text Semantic residual: extractor OR abstract_ids ==========
         alpha_sem = torch.sigmoid(self.semantic_alpha)
 
+        if self.semantic_extractor is not None:
+            print("[DEBUG] USING EXTRACTOR PATH")
+            text_attn_mask = (input_ids != 0).long()
+            with torch.set_grad_enabled(not any(p.requires_grad for p in self.vlm.model.text_model.parameters())):
+                text_out = self.vlm.model.text_model(
+                    input_ids=input_ids,
+                    attention_mask=text_attn_mask,
+                    output_hidden_states=True,
+                )
+            layer_idx = getattr(self, 'semantic_extract_layer', 16)
+            layer_idx = min(layer_idx, len(text_out.hidden_states) - 1)
+            text_hidden = text_out.hidden_states[layer_idx]
+            print(f"[DEBUG] text_hidden={text_hidden.shape}, attn_mask={text_attn_mask.shape}")
+            sem_pooled = self.semantic_extractor(text_hidden, text_attn_mask)
+            print(f"[DEBUG] extractor output sem_pooled={sem_pooled.shape}")
+            sem_pooled = sem_pooled.to(device=device, dtype=dtype)
+        else:
+            print("[DEBUG] USING OLD ABSTRACT_IDS PATH")
+            sem_out = self.semantic_task_encoder(abstract_task_ids)
+            sem_embeds = sem_out["task_features"]
+            if self.semantic_proj is not None:
+                sem_embeds = self.semantic_proj(sem_embeds)
+            sem_embeds = sem_embeds.to(device=device, dtype=dtype)
+            sem_mask = (abstract_task_ids != 0).float().unsqueeze(-1).to(dtype=dtype)
+            sem_pooled = (sem_embeds * sem_mask).sum(dim=1, keepdim=True) / (sem_mask.sum(dim=1, keepdim=True) +1e-6)
+            sem_pooled = sem_pooled / (sem_pooled.norm(dim=-1, keepdim=True) + 1e-6)
+            print(f"[DEBUG] old path sem_pooled={sem_pooled.shape}")
+
+        print(f"[DEBUG] BEFORE ADD: text_embeds={text_embeds.shape}, sem_pooled={sem_pooled.shape}, alpha_sem={alpha_sem}")
         combined_text = text_embeds + alpha_sem * sem_pooled
 
         # ========== Visual Semantic: pooled residual injected into image features ==========
@@ -467,6 +502,7 @@ class SmolVLMVLA(PreTrainedModel):
             num_valid = valid_per_sample[b].item()
             sample_image_feats = full_image_features[b, :num_valid].reshape(-1, hidden_size)
             sample_text_feats = combined_text[b]
+            print(f"[DEBUG] img_feats={sample_image_feats.shape} text_feats={sample_text_feats.shape} sem_pooled={sem_pooled.shape} combined={combined_text.shape}")
 
             if vis_residual_per_sample is not None:
                 sample_image_feats = sample_image_feats + vis_residual_per_sample[b:b+1]
@@ -517,7 +553,7 @@ class SmolVLMVLA(PreTrainedModel):
         3) Target: velocity u_t = noise - actions
         4) Model predicts v_t, compute MSE(v_t, u_t)
         """
-        if abstract_task_ids is not None and self.use_semantic:
+        if self.use_semantic and (abstract_task_ids is not None or self.semantic_extractor is not None):
             enc = self.forward_vlm_semantic(image_input, image_mask, input_ids, abstract_task_ids)
         else:
             enc = self.forward_vlm_efficient(image_input, image_mask, input_ids)
@@ -587,7 +623,7 @@ class SmolVLMVLA(PreTrainedModel):
           - Visual+Semantic: both abstract_task_ids and visual_semantics (triple residual)
         """
         self.eval()
-        if abstract_task_ids is not None and self.use_semantic:
+        if self.use_semantic and (abstract_task_ids is not None or self.semantic_extractor is not None):
             enc = self.forward_vlm_semantic(image_input, image_mask, input_ids,
                                            abstract_task_ids, visual_semantics)
         else:
