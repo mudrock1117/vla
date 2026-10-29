@@ -1,0 +1,75 @@
+[robosuite WARNING] No private macro file found! (__init__.py:7)
+[robosuite WARNING] It is recommended to use a private macro file (__init__.py:8)
+[robosuite WARNING] To setup, run: python /home/zdh/anaconda3/envs/simvla/lib/python3.10/site-packages/robosuite/scripts/setup_macros.py (__init__.py:9)
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Loading SimVLA from checkpoints/SimVLA-LIBERO ...
+   SemanticExtractor mode enabled (LLM hidden states → MLP)
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] Model config: pad_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 128002. This may result in unexpected behavior.
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:  26%|██▌       | 127/489 [00:00<00:00, 1258.70it/s]Loading weights:  52%|█████▏    | 254/489 [00:00<00:00, 1215.42it/s]Loading weights:  83%|████████▎ | 407/489 [00:00<00:00, 1342.58it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 1392.49it/s]
+   Loaded SemanticExtractor weights (5 keys)
+   ⚠️ Semantic/Visual weights NOT found (28 keys) — using random init
+   unexpected=0
+   α_sem=0.5686
+[LiberoJointActionSpace] Loaded state norm stats, dim=8
+[LiberoJointActionSpace] Loaded actions norm stats, dim=7
+   Norm stats loaded from norm_stats/libero_norm.json
+   Device: cuda
+
+======================================================================
+  [BASELINE] SPLIT: OOD-Both  (7 tasks × 10 trials)
+======================================================================
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+  Loading: LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_c →  60.0% (6/10)
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+  Loading: LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_t → 100.0% (10/10)
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+  Loading: LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_th →  90.0% (9/10)
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+  Loading: KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_o → 100.0% (10/10)
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+  Loading: KITCHEN_SCENE8_put_both_moka_pots_on_the_stove          →  10.0% (1/10)
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+  Loading: LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_ → 100.0% (10/10)
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+  Loading: STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_ →  90.0% (9/10)
+
+  OOD-Both OVERALL: 55/70 = 78.6%
+  Saved → eval_results/OOD-Both.json

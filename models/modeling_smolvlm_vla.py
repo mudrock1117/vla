@@ -109,8 +109,10 @@ class SmolVLMVLA(PreTrainedModel):
 
         # Semantic abstraction encoder (de-instantiated task representation)
         self.use_semantic: bool = getattr(config, 'use_semantic', False)
+        self.use_semantic_extractor: bool = getattr(config, 'use_semantic_extractor', False)
         self.semantic_task_encoder = None
         self.semantic_proj = None
+        self.semantic_extractor = None
         if self.use_semantic:
             from .abstract_task_encoder import AbstractTaskEncoder
             self.semantic_task_encoder = AbstractTaskEncoder(
@@ -125,21 +127,20 @@ class SmolVLMVLA(PreTrainedModel):
                 self.semantic_proj = nn.Linear(config.semantic_hidden_size, vlm_hidden_size)
             import torch.nn as nn
             self.semantic_alpha = nn.Parameter(torch.tensor(0.0))
-            if getattr(config, 'use_semantic_extractor', False):
+            if self.use_semantic_extractor:
                 from .semantic_extractor import SemanticExtractor
                 text_hidden_size = self.vlm.model.text_model.config.hidden_size
                 self.semantic_extractor = SemanticExtractor(
                     hidden_size=text_hidden_size,
-                    bottleneck=getattr(config, 'semantic_hidden_size', 256),
+                    bottleneck=getattr(config, 'semantic_hidden_size', 1024),
                 )
-                self.semantic_extract_layer = getattr(config, 'semantic_extract_layer', 16)
+                self.semantic_extract_layer = getattr(config, 'semantic_extract_layer', 24)
                 for p in self.vlm.model.text_model.parameters():
                     p.requires_grad = False
                 logging.info(f"✓ SemanticExtractor (LLM hidden-based) enabled: "
                              f"layer={self.semantic_extract_layer}, "
                              f"text_frozen=True")
             else:
-                self.semantic_extractor = None
                 logging.info(f"✓ Semantic abstraction enabled: "
                              f"hidden={config.semantic_hidden_size}, "
                              f"proj={'needed' if self.semantic_proj is not None else 'direct'}, "
@@ -152,10 +153,10 @@ class SmolVLMVLA(PreTrainedModel):
         if self.use_visual_semantic:
             from .visual_grounding import VisualSemanticEncoder
             self.visual_semantic_encoder = VisualSemanticEncoder(
-                hidden_size=getattr(config, 'visual_semantic_hidden_size', 256),
+                hidden_size=getattr(config, 'visual_semantic_hidden_size', 1024),
                 max_objects=getattr(config, 'visual_max_objects', 8),
             )
-            vs_hidden = getattr(config, 'visual_semantic_hidden_size', 256)
+            vs_hidden = getattr(config, 'visual_semantic_hidden_size', 1024)
             if vs_hidden != vlm_hidden_size:
                 import torch.nn as nn
                 self.visual_proj = nn.Linear(vs_hidden, vlm_hidden_size)
@@ -388,7 +389,7 @@ class SmolVLMVLA(PreTrainedModel):
         pixel_values: torch.FloatTensor,
         image_mask: torch.Tensor,
         input_ids: torch.LongTensor,
-        abstract_task_ids: torch.LongTensor,
+        abstract_task_ids: torch.LongTensor | None = None,
         visual_semantics: list | None = None,
     ) -> Dict[str, torch.Tensor]:
         """
@@ -438,7 +439,6 @@ class SmolVLMVLA(PreTrainedModel):
         alpha_sem = torch.sigmoid(self.semantic_alpha)
 
         if self.semantic_extractor is not None:
-            print("[DEBUG] USING EXTRACTOR PATH")
             text_attn_mask = (input_ids != 0).long()
             with torch.set_grad_enabled(not any(p.requires_grad for p in self.vlm.model.text_model.parameters())):
                 text_out = self.vlm.model.text_model(
@@ -446,15 +446,12 @@ class SmolVLMVLA(PreTrainedModel):
                     attention_mask=text_attn_mask,
                     output_hidden_states=True,
                 )
-            layer_idx = getattr(self, 'semantic_extract_layer', 16)
+            layer_idx = getattr(self, 'semantic_extract_layer', 24)
             layer_idx = min(layer_idx, len(text_out.hidden_states) - 1)
             text_hidden = text_out.hidden_states[layer_idx]
-            print(f"[DEBUG] text_hidden={text_hidden.shape}, attn_mask={text_attn_mask.shape}")
             sem_pooled = self.semantic_extractor(text_hidden, text_attn_mask)
-            print(f"[DEBUG] extractor output sem_pooled={sem_pooled.shape}")
-            sem_pooled = sem_pooled.to(device=device, dtype=dtype)
+            combined_text = text_embeds + alpha_sem * sem_pooled
         else:
-            print("[DEBUG] USING OLD ABSTRACT_IDS PATH")
             sem_out = self.semantic_task_encoder(abstract_task_ids)
             sem_embeds = sem_out["task_features"]
             if self.semantic_proj is not None:
@@ -463,10 +460,7 @@ class SmolVLMVLA(PreTrainedModel):
             sem_mask = (abstract_task_ids != 0).float().unsqueeze(-1).to(dtype=dtype)
             sem_pooled = (sem_embeds * sem_mask).sum(dim=1, keepdim=True) / (sem_mask.sum(dim=1, keepdim=True) +1e-6)
             sem_pooled = sem_pooled / (sem_pooled.norm(dim=-1, keepdim=True) + 1e-6)
-            print(f"[DEBUG] old path sem_pooled={sem_pooled.shape}")
-
-        print(f"[DEBUG] BEFORE ADD: text_embeds={text_embeds.shape}, sem_pooled={sem_pooled.shape}, alpha_sem={alpha_sem}")
-        combined_text = text_embeds + alpha_sem * sem_pooled
+            combined_text = text_embeds + alpha_sem * sem_pooled
 
         # ========== Visual Semantic: pooled residual injected into image features ==========
         alpha_vis = torch.tensor(0.0, device=device, dtype=dtype)
@@ -502,7 +496,6 @@ class SmolVLMVLA(PreTrainedModel):
             num_valid = valid_per_sample[b].item()
             sample_image_feats = full_image_features[b, :num_valid].reshape(-1, hidden_size)
             sample_text_feats = combined_text[b]
-            print(f"[DEBUG] img_feats={sample_image_feats.shape} text_feats={sample_text_feats.shape} sem_pooled={sem_pooled.shape} combined={combined_text.shape}")
 
             if vis_residual_per_sample is not None:
                 sample_image_feats = sample_image_feats + vis_residual_per_sample[b:b+1]
@@ -527,8 +520,11 @@ class SmolVLMVLA(PreTrainedModel):
             output_hidden_states=True,
             return_dict=True,
         )
-        return {"vlm_features": lm_outputs.last_hidden_state,
-                "alpha_sem": alpha_sem, "alpha_vis": alpha_vis}
+        vlm_features = lm_outputs.last_hidden_state
+
+        return {"vlm_features": vlm_features,
+                "alpha_sem": alpha_sem, "alpha_vis": alpha_vis,
+                "sem_pooled": sem_pooled}
 
     # ================================= training =================================
     def forward(

@@ -42,6 +42,7 @@ from libero.libero.envs import OffScreenRenderEnv
 # ============================================================
 CHECKPOINT = "checkpoints/SimVLA-LIBERO"
 SEMANTIC_CKPT = "checkpoints/SimVLA-LIBERO/semantic_encoder.pt"
+EXTRACTOR_CKPT = "checkpoints/SimVLA-LIBERO/semantic_extractor.pt"
 NORM_STATS = "norm_stats/libero_norm.json"
 SPLITS_DIR = "datasets/ood_splits"
 SMOLVLM_MODEL = "HuggingFaceTB/SmolVLM-500M-Instruct"
@@ -67,6 +68,7 @@ def load_model(mode: str = "baseline"):
 
     use_semantic = (mode == "semantic" or mode == "visual")
     use_visual = (mode == "visual")
+    use_extractor = (mode == "semantic_extractor")
 
     owl_pipe = None
     if use_visual:
@@ -76,7 +78,13 @@ def load_model(mode: str = "baseline"):
         print(f"   Loading OWL-ViT for visual grounding ...")
         owl_pipe = load_owl_vit_pipeline(device=device)
 
-    if use_semantic:
+    if use_extractor:
+        config.use_semantic = True
+        config.use_semantic_extractor = True
+        config.semantic_hidden_size = 256
+        print(f"   SemanticExtractor mode enabled (LLM hidden states → MLP)")
+        tokenizer = None
+    elif use_semantic:
         config.use_semantic = True
         config.semantic_hidden_size = 256
         config.semantic_num_layers = 2
@@ -93,12 +101,20 @@ def load_model(mode: str = "baseline"):
     state = safetensors.torch.load_file(os.path.join(CHECKPOINT, "model.safetensors"))
 
     sem_state = {}
-    if os.path.exists(SEMANTIC_CKPT):
+    if not use_extractor and os.path.exists(SEMANTIC_CKPT):
         sem_state = torch.load(SEMANTIC_CKPT, map_location="cpu")
+
+    ext_state = {}
+    if use_extractor and os.path.exists(EXTRACTOR_CKPT):
+        ext_state = torch.load(EXTRACTOR_CKPT, map_location="cpu")
+        print(f"   Loaded SemanticExtractor weights ({len(ext_state)} keys)")
 
     if sem_state:
         state.update(sem_state)
         print(f"   Loaded semantic+visual encoder weights ({len(sem_state)} keys)")
+
+    if ext_state:
+        state.update(ext_state)
 
     missing, unexpected = model.load_state_dict(state, strict=False)
 
@@ -110,7 +126,7 @@ def load_model(mode: str = "baseline"):
         print(f"   ⚠️ Other missing: {len(other_missing)} keys")
     print(f"   unexpected={len(unexpected)}")
 
-    if use_semantic:
+    if use_semantic or use_extractor:
         print(f"   α_sem={torch.sigmoid(model.semantic_alpha).item():.4f}")
     if use_visual:
         print(f"   α_vis={torch.sigmoid(model.visual_alpha).item():.4f}")
@@ -352,7 +368,7 @@ def main():
     parser.add_argument("--num_trials", type=int, default=10)
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--mode", type=str, default="baseline",
-                        choices=["baseline", "semantic", "visual"])
+                        choices=["baseline", "semantic", "visual", "semantic_extractor"])
     args = parser.parse_args()
 
     model, processor, tokenizer, owl_pipe = load_model(mode=args.mode)

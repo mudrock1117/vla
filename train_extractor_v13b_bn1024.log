@@ -1,0 +1,274 @@
+[robosuite WARNING] No private macro file found! (__init__.py:7)
+[robosuite WARNING] It is recommended to use a private macro file (__init__.py:8)
+[robosuite WARNING] To setup, run: python /home/zdh/anaconda3/envs/simvla/lib/python3.10/site-packages/robosuite/scripts/setup_macros.py (__init__.py:9)
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+[PERTURB] Loaded 40 tasks with perturbations
+Loading models from checkpoints/SimVLA-LIBERO ...
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+[transformers] Model config: pad_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 128002. This may result in unexpected behavior.
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:  34%|███▎      | 164/489 [00:00<00:00, 1626.96it/s]Loading weights:  67%|██████▋   | 327/489 [00:00<00:00, 1464.46it/s]Loading weights:  97%|█████████▋| 475/489 [00:00<00:00, 1454.02it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 1481.19it/s]
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights:  24%|██▍       | 118/489 [00:00<00:00, 1164.20it/s]Loading weights:  51%|█████     | 249/489 [00:00<00:00, 1242.83it/s]Loading weights:  85%|████████▍ | 414/489 [00:00<00:00, 1427.53it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 1350.76it/s]
+  Baseline model: frozen (teacher)
+  Extractor model: trainable=0.493M / total=813.16M
+    - semantic_extractor: 0.493M
+    - semantic_alpha: 1 params
+    - text_model frozen: True
+[LiberoJointActionSpace] Loaded state norm stats, dim=8
+[LiberoJointActionSpace] Loaded actions norm stats, dim=7
+[LiberoJointActionSpace] Loaded state norm stats, dim=8
+[LiberoJointActionSpace] Loaded actions norm stats, dim=7
+  Norm stats loaded from norm_stats/libero_norm.json
+  Device: cuda
+
+=== Collecting from ID (20 tasks) ===
+  pick_up_the_alphabet_soup_and_place_it_in_the_basket         rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_bbq_sauce_and_place_it_in_the_basket             rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_butter_and_place_it_in_the_basket                rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  open_the_middle_drawer_of_the_cabinet                        rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  open_the_top_drawer_and_put_the_bowl_inside                  rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  push_the_plate_to_the_front_of_the_stove                     rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  put_the_bowl_on_the_plate                                    rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  put_the_bowl_on_the_stove                                    rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  put_the_wine_bottle_on_the_rack                              rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  turn_on_the_stove                                            rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_from_table_center_and_place_it_on_the rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabin rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_o rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_t rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_pl rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plat rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+
+=== Collecting from OOD-Composition (6 tasks) ===
+  put_the_bowl_on_top_of_the_cabinet                           rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  put_the_cream_cheese_in_the_bowl                             rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  put_the_wine_bottle_on_top_of_the_cabinet                    rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  KITCHEN_SCENE4_put_the_black_bowl_in_the_bottom_drawer_of_th rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_th rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+
+=== Collecting from OOD-Both (7 tasks) ===
+  LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_ rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  LIVING_ROOM_SCENE2_put_both_the_alphabet_soup_and_the_tomato rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_but rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it  rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  KITCHEN_SCENE8_put_both_moka_pots_on_the_stove               rep=1/3 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  KITCHEN_SCENE8_put_both_moka_pots_on_the_stove               rep=2/3 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  KITCHEN_SCENE8_put_both_moka_pots_on_the_stove               rep=3/3 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+  LIVING_ROOM_SCENE5_put_the_white_mug_on_the_left_plate_and_p rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=2)
+  STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_compa rep=1/1 [info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+[Warning]: datasets path /media/zdh/f37daf80-9fee-4790-aa5a-bcedd13aa82e/2026/hdx/SimVLA/evaluation/libero/LIBERO/libero/libero/../datasets does not exist!
+→ 40 steps (pert=3)
+
+Total samples: 1400, unique tasks: 33, unique instructions: 33
+Tasks with perturbation support: 33/33
+
+=== Training SemanticExtractor ===
+  steps=2000, lr=0.0001, batch_size=16
+  contrast_weight=0.0, contrast_freq=5
+  perturbation_prob=0.5 (50% samples use perturbed instruction)
+  Step   100/2000  distill=0.293117  contrast=0.000000  pert=50%  [31s, 0.3s/step]
+  Step   200/2000  distill=0.260037  contrast=0.000000  pert=56%  [62s, 0.3s/step]
+  Step   300/2000  distill=0.247469  contrast=0.000000  pert=50%  [93s, 0.3s/step]
+  Step   400/2000  distill=0.244522  contrast=0.000000  pert=69%  [124s, 0.3s/step]
+  Step   500/2000  distill=0.239109  contrast=0.000000  pert=31%  [155s, 0.3s/step]
+  Step   600/2000  distill=0.235193  contrast=0.000000  pert=44%  [186s, 0.3s/step]
+  Step   700/2000  distill=0.236807  contrast=0.000000  pert=38%  [217s, 0.3s/step]
+  Step   800/2000  distill=0.226378  contrast=0.000000  pert=50%  [248s, 0.3s/step]
+  Step   900/2000  distill=0.229811  contrast=0.000000  pert=31%  [279s, 0.3s/step]
+  Step  1000/2000  distill=0.230936  contrast=0.000000  pert=56%  [310s, 0.3s/step]
+  Step  1100/2000  distill=0.235714  contrast=0.000000  pert=44%  [341s, 0.3s/step]
+  Step  1200/2000  distill=0.228066  contrast=0.000000  pert=62%  [372s, 0.3s/step]
+  Step  1300/2000  distill=0.224665  contrast=0.000000  pert=62%  [403s, 0.3s/step]
+  Step  1400/2000  distill=0.221557  contrast=0.000000  pert=62%  [434s, 0.3s/step]
+  Step  1500/2000  distill=0.214934  contrast=0.000000  pert=44%  [465s, 0.3s/step]
+  Step  1600/2000  distill=0.230255  contrast=0.000000  pert=56%  [496s, 0.3s/step]
+  Step  1700/2000  distill=0.225085  contrast=0.000000  pert=56%  [527s, 0.3s/step]
+  Step  1800/2000  distill=0.214008  contrast=0.000000  pert=62%  [558s, 0.3s/step]
+  Step  1900/2000  distill=0.212300  contrast=0.000000  pert=50%  [589s, 0.3s/step]
+  Step  2000/2000  distill=0.222879  contrast=0.000000  pert=31%  [620s, 0.3s/step]
+
+✅ SemanticExtractor saved → checkpoints/SimVLA-LIBERO/semantic_extractor.pt
+   Keys: 5
+     semantic_alpha: torch.Size([])
+     semantic_extractor.mlp.0.weight: torch.Size([256, 960])
+     semantic_extractor.mlp.0.bias: torch.Size([256])
+     semantic_extractor.mlp.2.weight: torch.Size([960, 256])
+     semantic_extractor.mlp.2.bias: torch.Size([960])
+
+Done. Run eval with:
+  python eval_ood_splits.py --split OOD-Both --num_trials 10 --mode semantic_extractor
+  python eval_ood_splits.py --split OOD-Composition --num_trials 10 --mode semantic_extractor
+  python eval_libero_pro.py                 # orig + pert + Δ robustness
+
+Compare with baselines:
+  baseline (text only):     OOD-Both=78.6%, LIBERO-PRO orig=86.0% pert=59.5% Δ=-26.5%
+  old semantic (regex):     OOD-Both=90.0%, LIBERO-PRO orig=82.5% pert=57.5% Δ=-25.0%
+  extractor (ours):         TBD

@@ -59,7 +59,7 @@ class SmolVLMVLAConfig(PretrainedConfig):
         semantic_max_len: int = 16,
         semantic_vocab_size: int = 16,
         use_semantic_extractor: bool = False,
-        semantic_extract_layer: int = 16,
+        semantic_extract_layer: int = 24,
 
         **kwargs,
     ):
